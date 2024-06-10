@@ -14,17 +14,21 @@ class TrendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        configureTableVeiw()
         configureNavigation()
-        configurHierarchy()
-        configureLayout()
         configureUI()
     }
     
-    func configureTableVeiw() {
+    func configureUI() {
+        view.backgroundColor = .white
+        
         trendTableView.delegate = self
         trendTableView.dataSource = self
         trendTableView.register(TrendTableViewCell.self, forCellReuseIdentifier: TrendTableViewCell.id)
+        
+        view.addSubview(trendTableView)
+        trendTableView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     func configureNavigation() {
@@ -38,21 +42,6 @@ class TrendViewController: UIViewController {
         let right = UIBarButtonItem(image: UIImage(named: "magnifyingglass"), style: .plain, target: self, action: #selector(rightBarButtonClicked))
         navigationController?.navigationBar.topItem?.rightBarButtonItem = right
         navigationController?.navigationBar.tintColor = UIColor.black
-    }
-    
-    func configurHierarchy() {
-        view.addSubview(trendTableView)
-    }
-    
-    func configureLayout() {
-        let safeArea = view.safeAreaLayoutGuide
-        trendTableView.snp.makeConstraints {
-            $0.edges.equalTo(safeArea)
-        }
-    }
-    
-    func configureUI() {
-        view.backgroundColor = .white
     }
     
     @objc func leftBarButtonClicked() {

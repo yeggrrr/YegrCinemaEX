@@ -14,9 +14,8 @@ class TrendTableViewCell: UITableViewCell {
     let genreLabel = UILabel()
     
     let mainView = UIView()
-    
     let posterImageView = UIImageView()
-    
+    let clipButton = UIButton(type: .system)
     let gradeStackeVeiw = UIStackView()
     let gradeLabel = UILabel()
     let gradeNumLabel = UILabel()
@@ -24,12 +23,8 @@ class TrendTableViewCell: UITableViewCell {
     let mainTitleStackView = UIStackView()
     let titleLabel = UILabel()
     let charactersLabel = UILabel()
-    
     let dividerView = UIView()
-    
     let learnMoreButton = UIButton()
-    
-    let clipButton = UIButton(type: .system)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
