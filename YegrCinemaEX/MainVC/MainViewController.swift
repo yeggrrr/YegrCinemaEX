@@ -173,7 +173,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let posterImage = resultData.posterPath
         let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
         cell.posterImageView.kf.setImage(with: url)
-        cell.gradeNumLabel.text = makeScoreText(item: resultData)
+        cell.ScoreNumLabel.text = makeScoreText(item: resultData)
         cell.titleLabel.text = resultData.title
         cell.charactersLabel.text = castData
         return cell

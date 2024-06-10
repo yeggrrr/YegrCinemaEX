@@ -17,8 +17,8 @@ class MainTableViewCell: UITableViewCell {
     let posterImageView = UIImageView()
     let clipButton = UIButton(type: .system)
     let gradeStackeVeiw = UIStackView()
-    let gradeLabel = UILabel()
-    let gradeNumLabel = UILabel()
+    let ScoreLabel = UILabel()
+    let ScoreNumLabel = UILabel()
     
     let mainTitleView = UIView()
     let titleLabel = UILabel()
@@ -50,8 +50,8 @@ class MainTableViewCell: UITableViewCell {
         mainView.addSubview(mainTitleView)
         
         mainView.addSubview(gradeStackeVeiw)
-        gradeStackeVeiw.addArrangedSubview(gradeLabel)
-        gradeStackeVeiw.addArrangedSubview(gradeNumLabel)
+        gradeStackeVeiw.addArrangedSubview(ScoreLabel)
+        gradeStackeVeiw.addArrangedSubview(ScoreNumLabel)
         
         mainTitleView.addSubview(titleLabel)
         mainTitleView.addSubview(charactersLabel)
@@ -107,12 +107,12 @@ class MainTableViewCell: UITableViewCell {
             $0.height.equalTo(30)
         }
         
-        gradeLabel.snp.makeConstraints {
+        ScoreLabel.snp.makeConstraints {
             $0.height.equalTo(30)
             $0.width.equalTo(45)
         }
         
-        gradeNumLabel.snp.makeConstraints {
+        ScoreNumLabel.snp.makeConstraints {
             $0.height.equalTo(30)
             $0.width.equalTo(45)
         }
@@ -148,13 +148,13 @@ class MainTableViewCell: UITableViewCell {
     func configureUI()  {
         dateGenreStackView.axis = .vertical
         
-        dateLabel.textColor = .label
+        dateLabel.textColor = .darkGray
         dateLabel.font = .systemFont(ofSize: 14)
         dateLabel.textAlignment = .left
         
         genreLabel.text = "#Mystery"
         genreLabel.textColor = .label
-        genreLabel.font = .boldSystemFont(ofSize: 18)
+        genreLabel.font = .boldSystemFont(ofSize: 20)
         genreLabel.textAlignment = .left
         
         mainView.layer.cornerRadius = 10
@@ -173,24 +173,28 @@ class MainTableViewCell: UITableViewCell {
         gradeStackeVeiw.backgroundColor = .clear
         gradeStackeVeiw.axis = .horizontal
         gradeStackeVeiw.distribution = .fillEqually
+        gradeStackeVeiw.layer.cornerRadius = 5
+        gradeStackeVeiw.clipsToBounds = true
         
-        gradeLabel.backgroundColor = .systemIndigo
-        gradeLabel.text = "평점"
-        gradeLabel.textAlignment = .center
-        gradeLabel.textColor = .white
-        gradeLabel.font = .systemFont(ofSize: 15)
+        ScoreLabel.backgroundColor = .systemIndigo
+        ScoreLabel.text = "평점"
+        ScoreLabel.textAlignment = .center
+        ScoreLabel.textColor = .white
+        ScoreLabel.font = .systemFont(ofSize: 15)
         
-        gradeNumLabel.backgroundColor = .white
-        gradeNumLabel.textAlignment = .center
-        gradeNumLabel.textColor = .label
-        gradeNumLabel.font = .systemFont(ofSize: 15)
+        ScoreNumLabel.backgroundColor = .white
+        ScoreNumLabel.textAlignment = .center
+        ScoreNumLabel.textColor = .label
+        ScoreNumLabel.font = .systemFont(ofSize: 15)
         
         titleLabel.textAlignment = .left
-        titleLabel.font = .systemFont(ofSize: 22)
+        titleLabel.textColor = .label
+        titleLabel.font = .boldSystemFont(ofSize: 22)
         
-        charactersLabel.text = "Kento Yamazaki, Tao Tsuchiya, Nijiro Murakami..."
         charactersLabel.textAlignment = .left
+        charactersLabel.textColor = .darkGray
         charactersLabel.font = .systemFont(ofSize: 17)
+        
         
         dividerView.backgroundColor = .darkGray
         
