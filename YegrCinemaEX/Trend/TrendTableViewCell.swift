@@ -27,7 +27,6 @@ class TrendTableViewCell: UITableViewCell {
     
     let dividerView = UIView()
     
-    let learnMoreLabel = UILabel()
     let learnMoreButton = UIButton()
     
     let clipButton = UIButton(type: .system)
@@ -64,7 +63,6 @@ class TrendTableViewCell: UITableViewCell {
         
         mainView.addSubview(dividerView)
         
-        mainView.addSubview(learnMoreLabel)
         mainView.addSubview(learnMoreButton)
     }
     
@@ -134,20 +132,14 @@ class TrendTableViewCell: UITableViewCell {
         }
         
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(mainTitleStackView.snp.bottom).offset(10)
+            $0.top.equalTo(mainTitleStackView.snp.bottom).offset(20)
             $0.horizontalEdges.equalTo(mainTitleStackView)
             $0.height.equalTo(1)
         }
         
-        learnMoreLabel.snp.makeConstraints {
-            $0.top.equalTo(dividerView.snp.bottom).offset(10)
-            $0.leading.equalTo(mainTitleStackView)
-            $0.bottom.equalTo(mainView).offset(-10)
-        }
-        
         learnMoreButton.snp.makeConstraints {
             $0.top.equalTo(dividerView.snp.bottom).offset(10)
-            $0.trailing.equalTo(mainTitleStackView)
+            $0.horizontalEdges.equalTo(mainTitleStackView)
             $0.bottom.equalTo(mainView).offset(-10)
         }
     }
@@ -195,20 +187,18 @@ class TrendTableViewCell: UITableViewCell {
         
         titleLabel.text = "Alice in Borderland"
         titleLabel.textAlignment = .left
-        titleLabel.font = .systemFont(ofSize: 20)
+        titleLabel.font = .systemFont(ofSize: 22)
         
         charactersLabel.text = "Kento Yamazaki, Tao Tsuchiya, Nijiro Murakami..."
         charactersLabel.textAlignment = .left
-        charactersLabel.font = .systemFont(ofSize: 16)
+        charactersLabel.font = .systemFont(ofSize: 17)
         
         dividerView.backgroundColor = .darkGray
         
-        learnMoreLabel.text = "자세히 보기"
-        learnMoreLabel.textAlignment = .left
-        learnMoreLabel.textColor = .label
-        learnMoreLabel.font = .systemFont(ofSize: 15)
-        
+        learnMoreButton.setTitle("자세히 보기", for: .normal)
+        learnMoreButton.setTitleColor(.label, for: .normal)
         learnMoreButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         learnMoreButton.tintColor = .label
+        learnMoreButton.semanticContentAttribute = .forceRightToLeft
     }
 }
