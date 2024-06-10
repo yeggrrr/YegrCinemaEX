@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D12C16D5650059FA66 /* AppDelegate.swift */; };
 		68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D32C16D5650059FA66 /* SceneDelegate.swift */; };
-		68F161D62C16D5650059FA66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D52C16D5650059FA66 /* ViewController.swift */; };
+		68F161D62C16D5650059FA66 /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D52C16D5650059FA66 /* TrendViewController.swift */; };
 		68F161DB2C16D5660059FA66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68F161DA2C16D5660059FA66 /* Assets.xcassets */; };
 		68F161DE2C16D5660059FA66 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 68F161DD2C16D5660059FA66 /* Base */; };
 		68F161E62C16D7FF0059FA66 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 68F161E52C16D7FF0059FA66 /* .gitignore */; };
@@ -18,19 +18,21 @@
 		68F161F12C16D8DD0059FA66 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F02C16D8DD0059FA66 /* Kingfisher */; };
 		68F161F42C16D8EB0059FA66 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F32C16D8EB0059FA66 /* Alamofire */; };
 		68F161F72C16D8F60059FA66 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F62C16D8F60059FA66 /* SnapKit */; };
+		68F161FB2C16F1010059FA66 /* TrendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FA2C16F1010059FA66 /* TrendTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		68F161CE2C16D5650059FA66 /* YegrCinemaEX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YegrCinemaEX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F161D12C16D5650059FA66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68F161D32C16D5650059FA66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		68F161D52C16D5650059FA66 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		68F161D52C16D5650059FA66 /* TrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
 		68F161DA2C16D5660059FA66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68F161DD2C16D5660059FA66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68F161DF2C16D5660059FA66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68F161E52C16D7FF0059FA66 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		68F161E72C16D81D0059FA66 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		68F161ED2C16D8B30059FA66 /* ReusableProtocol+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReusableProtocol+.swift"; sourceTree = "<group>"; };
+		68F161FA2C16F1010059FA66 /* TrendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +71,6 @@
 			children = (
 				68F161D12C16D5650059FA66 /* AppDelegate.swift */,
 				68F161D32C16D5650059FA66 /* SceneDelegate.swift */,
-				68F161D52C16D5650059FA66 /* ViewController.swift */,
 				68F161DA2C16D5660059FA66 /* Assets.xcassets */,
 				68F161DC2C16D5660059FA66 /* LaunchScreen.storyboard */,
 				68F161EB2C16D87F0059FA66 /* Trend */,
@@ -92,6 +93,8 @@
 		68F161EB2C16D87F0059FA66 /* Trend */ = {
 			isa = PBXGroup;
 			children = (
+				68F161D52C16D5650059FA66 /* TrendViewController.swift */,
+				68F161FA2C16F1010059FA66 /* TrendTableViewCell.swift */,
 			);
 			path = Trend;
 			sourceTree = "<group>";
@@ -184,11 +187,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68F161D62C16D5650059FA66 /* ViewController.swift in Sources */,
+				68F161D62C16D5650059FA66 /* TrendViewController.swift in Sources */,
 				68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */,
 				68F161EE2C16D8B30059FA66 /* ReusableProtocol+.swift in Sources */,
 				68F161E82C16D81D0059FA66 /* APIKey.swift in Sources */,
 				68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */,
+				68F161FB2C16F1010059FA66 /* TrendTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
