@@ -14,6 +14,10 @@
 		68F161DE2C16D5660059FA66 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 68F161DD2C16D5660059FA66 /* Base */; };
 		68F161E62C16D7FF0059FA66 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 68F161E52C16D7FF0059FA66 /* .gitignore */; };
 		68F161E82C16D81D0059FA66 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161E72C16D81D0059FA66 /* APIKey.swift */; };
+		68F161EE2C16D8B30059FA66 /* ReusableProtocol+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161ED2C16D8B30059FA66 /* ReusableProtocol+.swift */; };
+		68F161F12C16D8DD0059FA66 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F02C16D8DD0059FA66 /* Kingfisher */; };
+		68F161F42C16D8EB0059FA66 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F32C16D8EB0059FA66 /* Alamofire */; };
+		68F161F72C16D8F60059FA66 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F62C16D8F60059FA66 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,7 @@
 		68F161DF2C16D5660059FA66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68F161E52C16D7FF0059FA66 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		68F161E72C16D81D0059FA66 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		68F161ED2C16D8B30059FA66 /* ReusableProtocol+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReusableProtocol+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +38,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F161F72C16D8F60059FA66 /* SnapKit in Frameworks */,
+				68F161F12C16D8DD0059FA66 /* Kingfisher in Frameworks */,
+				68F161F42C16D8EB0059FA66 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,10 +72,35 @@
 				68F161D52C16D5650059FA66 /* ViewController.swift */,
 				68F161DA2C16D5660059FA66 /* Assets.xcassets */,
 				68F161DC2C16D5660059FA66 /* LaunchScreen.storyboard */,
+				68F161EB2C16D87F0059FA66 /* Trend */,
+				68F161EC2C16D88D0059FA66 /* Credit */,
+				68F161E92C16D8570059FA66 /* Extension */,
 				68F161DF2C16D5660059FA66 /* Info.plist */,
 				68F161E72C16D81D0059FA66 /* APIKey.swift */,
 			);
 			path = YegrCinemaEX;
+			sourceTree = "<group>";
+		};
+		68F161E92C16D8570059FA66 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				68F161ED2C16D8B30059FA66 /* ReusableProtocol+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		68F161EB2C16D87F0059FA66 /* Trend */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Trend;
+			sourceTree = "<group>";
+		};
+		68F161EC2C16D88D0059FA66 /* Credit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Credit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,6 +119,11 @@
 			dependencies = (
 			);
 			name = YegrCinemaEX;
+			packageProductDependencies = (
+				68F161F02C16D8DD0059FA66 /* Kingfisher */,
+				68F161F32C16D8EB0059FA66 /* Alamofire */,
+				68F161F62C16D8F60059FA66 /* SnapKit */,
+			);
 			productName = YegrCinemaEX;
 			productReference = 68F161CE2C16D5650059FA66 /* YegrCinemaEX.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +152,11 @@
 				Base,
 			);
 			mainGroup = 68F161C52C16D5650059FA66;
+			packageReferences = (
+				68F161EF2C16D8DD0059FA66 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				68F161F22C16D8EB0059FA66 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				68F161F52C16D8F60059FA66 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 68F161CF2C16D5650059FA66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -143,6 +186,7 @@
 			files = (
 				68F161D62C16D5650059FA66 /* ViewController.swift in Sources */,
 				68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */,
+				68F161EE2C16D8B30059FA66 /* ReusableProtocol+.swift in Sources */,
 				68F161E82C16D81D0059FA66 /* APIKey.swift in Sources */,
 				68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */,
 			);
@@ -365,6 +409,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		68F161EF2C16D8DD0059FA66 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
+		68F161F22C16D8EB0059FA66 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		68F161F52C16D8F60059FA66 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		68F161F02C16D8DD0059FA66 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68F161EF2C16D8DD0059FA66 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		68F161F32C16D8EB0059FA66 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68F161F22C16D8EB0059FA66 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		68F161F62C16D8F60059FA66 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68F161F52C16D8F60059FA66 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 68F161C62C16D5650059FA66 /* Project object */;
 }
