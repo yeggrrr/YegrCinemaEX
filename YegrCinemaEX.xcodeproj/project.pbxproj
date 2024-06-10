@@ -19,7 +19,8 @@
 		68F161F42C16D8EB0059FA66 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F32C16D8EB0059FA66 /* Alamofire */; };
 		68F161F72C16D8F60059FA66 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F62C16D8F60059FA66 /* SnapKit */; };
 		68F161FB2C16F1010059FA66 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */; };
-		68F161FD2C170DB00059FA66 /* TrendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FC2C170DB00059FA66 /* TrendData.swift */; };
+		68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FC2C170DB00059FA66 /* MovieData.swift */; };
+		68F161FF2C1769AA0059FA66 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FE2C1769AA0059FA66 /* DateFormatter+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +35,8 @@
 		68F161E72C16D81D0059FA66 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		68F161ED2C16D8B30059FA66 /* ReusableProtocol+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReusableProtocol+.swift"; sourceTree = "<group>"; };
 		68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		68F161FC2C170DB00059FA66 /* TrendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendData.swift; sourceTree = "<group>"; };
+		68F161FC2C170DB00059FA66 /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
+		68F161FE2C1769AA0059FA66 /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				68F161ED2C16D8B30059FA66 /* ReusableProtocol+.swift */,
+				68F161FE2C1769AA0059FA66 /* DateFormatter+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -97,7 +100,7 @@
 			children = (
 				68F161D52C16D5650059FA66 /* MainViewController.swift */,
 				68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */,
-				68F161FC2C170DB00059FA66 /* TrendData.swift */,
+				68F161FC2C170DB00059FA66 /* MovieData.swift */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
@@ -194,9 +197,10 @@
 				68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */,
 				68F161EE2C16D8B30059FA66 /* ReusableProtocol+.swift in Sources */,
 				68F161E82C16D81D0059FA66 /* APIKey.swift in Sources */,
+				68F161FF2C1769AA0059FA66 /* DateFormatter+.swift in Sources */,
 				68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */,
 				68F161FB2C16F1010059FA66 /* MainTableViewCell.swift in Sources */,
-				68F161FD2C170DB00059FA66 /* TrendData.swift in Sources */,
+				68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

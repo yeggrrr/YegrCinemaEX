@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  YegrCinemaEX
 //
 //  Created by YJ on 6/10/24.
@@ -12,13 +12,32 @@ import Kingfisher
 
 class MainViewController: UIViewController {
     let trendTableView = UITableView()
-    var resultList: [Results] = []
+    var genreList: [GenreData.Genre] = []
+    var resultList: [MovieData.Results] = [] {
+        didSet {
+            let idList = resultList.map { $0.id }
+            for id in idList {
+                getCreditsData(id: id) { casts in
+                    self.castList.append(casts)
+                }
+            }
+        }
+    }
+    var castList: [String] = [] {
+        didSet {
+            let allCastFetched = resultList.count == castList.count
+            if allCastFetched {
+                self.trendTableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
      
         configureNavigation()
         configureUI()
+        getGenreData()
         getMovieData()
     }
     
@@ -28,6 +47,7 @@ class MainViewController: UIViewController {
         trendTableView.delegate = self
         trendTableView.dataSource = self
         trendTableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.id)
+        trendTableView.separatorStyle = .none
         
         view.addSubview(trendTableView)
         trendTableView.snp.makeConstraints {
@@ -43,13 +63,33 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.topItem?.leftBarButtonItem = left
         navigationController?.navigationBar.tintColor = UIColor.black
         
-        let right = UIBarButtonItem(image: UIImage(named: "magnifyingglass"), style: .plain, target: self, action: #selector(rightBarButtonClicked))
+        let right = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(rightBarButtonClicked))
         navigationController?.navigationBar.topItem?.rightBarButtonItem = right
         navigationController?.navigationBar.tintColor = UIColor.black
     }
     
+    func getGenreData() {
+        let url = APIURL.genreMovieListURL
+        let header: HTTPHeaders = [
+            "Authorization": APIKey.authorization,
+            "accept": APIKey.accept
+        ]
+        let params: Parameters  =  [
+            "api_key": APIKey.apiKey
+        ]
+        
+        AF.request(url, method: .get, parameters: params, headers: header).responseDecodable(of: GenreData.self) { response in
+            switch response.result {
+            case .success(let value):
+                self.genreList = value.genres
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func getMovieData() {
-        let url = APIURL.trendURL
+        let url = APIURL.trendingMovieURL
         let header: HTTPHeaders = [
             "Authorization": APIKey.authorization,
             "accept": APIKey.accept
@@ -58,14 +98,47 @@ class MainViewController: UIViewController {
         AF.request(url, method: .get, headers: header).responseDecodable(of: MovieData.self) { response in
             switch response.result {
             case .success(let value):
-                // print(value)
                 self.resultList = value.results
-                print(self.resultList)
-                self.trendTableView.reloadData()
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    func getCreditsData(id: Int, completion: @escaping (String) -> Void) {
+        let url = "\(APIURL.movieURL)\(id)/credits"
+        guard let creditsURL = URL(string: url) else {
+            completion("-")
+            return
+        }
+        
+        let params: Parameters  =  [
+            "api_key": APIKey.apiKey
+        ]
+        
+        AF.request(creditsURL, method: .get, parameters: params).responseDecodable(of: CreditData.self) { response in
+            switch response.result {
+            case .success(let value):
+                let cast = value.cast[0...3]
+                    .map{ $0.name }
+                    .joined(separator: ", ")
+                completion(cast)
+            case .failure(let error):
+                print(error)
+                completion("-")
+            }
+        }
+    }
+
+    func makeGenreText(item: MovieData.Results) -> String {
+        guard let genreId = item.genreIds.first else { return "# -" }
+        guard let genre = genreList.filter({ $0.id == genreId }).first else { return "# -" }
+        return "#\(genre.name)"
+    }
+    
+    func makeScoreText(item: MovieData.Results) -> String {
+        let grade = item.voteAverage
+        return String(format: "%.1f", grade)
     }
     
     @objc func leftBarButtonClicked() {
@@ -73,7 +146,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func rightBarButtonClicked() {
-        print("d")
+        
     }
 }
 
@@ -88,21 +161,21 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.id, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
+        let resultData = resultList[indexPath.row]
+        let castData = castList[indexPath.row]
+        
         cell.backgroundColor = UIColor(named: "cellBackgroundColor")
         cell.selectionStyle = .none
-        let resultData = resultList[indexPath.row]
         
-        let posterImage = resultData.poster_path
+        cell.dateLabel.text = DateFormatter.dashToSlash(dateString: resultData.releaseDate)
+        cell.genreLabel.text = makeGenreText(item: resultData)
+        
+        let posterImage = resultData.posterPath
         let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
         cell.posterImageView.kf.setImage(with: url)
-        
-        cell.dateLabel.text = resultData.release_date
+        cell.gradeNumLabel.text = makeScoreText(item: resultData)
         cell.titleLabel.text = resultData.title
-        
-        let grade = resultData.vote_average
-        let formattedGrade = String(format: "%.1f", grade)
-        cell.gradeNumLabel.text = formattedGrade
-        
+        cell.charactersLabel.text = castData
         return cell
     }
 }

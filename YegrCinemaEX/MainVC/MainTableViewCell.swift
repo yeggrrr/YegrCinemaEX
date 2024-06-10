@@ -1,5 +1,5 @@
 //
-//  TrendTableViewCell.swift
+//  MainTableViewCell.swift
 //  YegrCinemaEX
 //
 //  Created by YJ on 6/10/24.
