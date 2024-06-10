@@ -7,15 +7,18 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 class TrendViewController: UIViewController {
     let trendTableView = UITableView()
+    var resultList: [Results] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
      
         configureNavigation()
         configureUI()
+        getMovieData()
     }
     
     func configureUI() {
@@ -42,6 +45,26 @@ class TrendViewController: UIViewController {
         let right = UIBarButtonItem(image: UIImage(named: "magnifyingglass"), style: .plain, target: self, action: #selector(rightBarButtonClicked))
         navigationController?.navigationBar.topItem?.rightBarButtonItem = right
         navigationController?.navigationBar.tintColor = UIColor.black
+    }
+    
+    func getMovieData() {
+        print(#function)
+        let url = APIURL.trendURL
+        let header: HTTPHeaders = [
+            "Authorization": APIKey.authorization,
+            "accept": APIKey.accept
+        ]
+        
+        AF.request(url, method: .get, headers: header).responseDecodable(of: MovieData.self) { response in
+            switch response.result {
+            case .success(let value):
+                print(value)
+                self.resultList = value.results
+                self.trendTableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     @objc func leftBarButtonClicked() {
