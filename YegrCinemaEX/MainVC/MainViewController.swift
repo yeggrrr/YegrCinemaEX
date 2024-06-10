@@ -51,7 +51,7 @@ class MainViewController: UIViewController {
         
         view.addSubview(trendTableView)
         trendTableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.edges.equalTo(view)
         }
     }
     
