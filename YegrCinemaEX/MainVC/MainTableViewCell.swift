@@ -119,19 +119,21 @@ class MainTableViewCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(mainTitleView.snp.top).offset(20)
-            $0.horizontalEdges.equalTo(mainTitleView)
+            $0.leading.equalTo(mainTitleView.snp.leading).offset(20)
+            $0.trailing.equalTo(mainTitleView.snp.trailing).offset(-20)
             $0.height.equalTo(30)
         }
         
         charactersLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom)
-            $0.horizontalEdges.equalTo(mainTitleView)
+            $0.leading.equalTo(mainTitleView.snp.leading).offset(20)
+            $0.trailing.equalTo(mainTitleView.snp.trailing).offset(-20)
             $0.height.equalTo(20)
         }
         
         dividerView.snp.makeConstraints {
             $0.top.equalTo(charactersLabel.snp.bottom).offset(20)
-            $0.horizontalEdges.equalTo(mainTitleView)
+            $0.horizontalEdges.equalTo(mainTitleView).inset(20)
             $0.height.equalTo(1)
         }
         
