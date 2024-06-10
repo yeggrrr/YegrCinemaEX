@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D12C16D5650059FA66 /* AppDelegate.swift */; };
 		68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D32C16D5650059FA66 /* SceneDelegate.swift */; };
-		68F161D62C16D5650059FA66 /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D52C16D5650059FA66 /* TrendViewController.swift */; };
+		68F161D62C16D5650059FA66 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D52C16D5650059FA66 /* MainViewController.swift */; };
 		68F161DB2C16D5660059FA66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68F161DA2C16D5660059FA66 /* Assets.xcassets */; };
 		68F161DE2C16D5660059FA66 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 68F161DD2C16D5660059FA66 /* Base */; };
 		68F161E62C16D7FF0059FA66 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 68F161E52C16D7FF0059FA66 /* .gitignore */; };
@@ -18,7 +18,7 @@
 		68F161F12C16D8DD0059FA66 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F02C16D8DD0059FA66 /* Kingfisher */; };
 		68F161F42C16D8EB0059FA66 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F32C16D8EB0059FA66 /* Alamofire */; };
 		68F161F72C16D8F60059FA66 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 68F161F62C16D8F60059FA66 /* SnapKit */; };
-		68F161FB2C16F1010059FA66 /* TrendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FA2C16F1010059FA66 /* TrendTableViewCell.swift */; };
+		68F161FB2C16F1010059FA66 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */; };
 		68F161FD2C170DB00059FA66 /* TrendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FC2C170DB00059FA66 /* TrendData.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,14 +26,14 @@
 		68F161CE2C16D5650059FA66 /* YegrCinemaEX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YegrCinemaEX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F161D12C16D5650059FA66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68F161D32C16D5650059FA66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		68F161D52C16D5650059FA66 /* TrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
+		68F161D52C16D5650059FA66 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		68F161DA2C16D5660059FA66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68F161DD2C16D5660059FA66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68F161DF2C16D5660059FA66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68F161E52C16D7FF0059FA66 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		68F161E72C16D81D0059FA66 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		68F161ED2C16D8B30059FA66 /* ReusableProtocol+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReusableProtocol+.swift"; sourceTree = "<group>"; };
-		68F161FA2C16F1010059FA66 /* TrendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendTableViewCell.swift; sourceTree = "<group>"; };
+		68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		68F161FC2C170DB00059FA66 /* TrendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,8 +75,8 @@
 				68F161D32C16D5650059FA66 /* SceneDelegate.swift */,
 				68F161DA2C16D5660059FA66 /* Assets.xcassets */,
 				68F161DC2C16D5660059FA66 /* LaunchScreen.storyboard */,
-				68F161EB2C16D87F0059FA66 /* Trend */,
-				68F161EC2C16D88D0059FA66 /* Credit */,
+				68F161EB2C16D87F0059FA66 /* MainVC */,
+				68F161EC2C16D88D0059FA66 /* DetailVC */,
 				68F161E92C16D8570059FA66 /* Extension */,
 				68F161DF2C16D5660059FA66 /* Info.plist */,
 				68F161E72C16D81D0059FA66 /* APIKey.swift */,
@@ -92,21 +92,21 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		68F161EB2C16D87F0059FA66 /* Trend */ = {
+		68F161EB2C16D87F0059FA66 /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
-				68F161D52C16D5650059FA66 /* TrendViewController.swift */,
-				68F161FA2C16F1010059FA66 /* TrendTableViewCell.swift */,
+				68F161D52C16D5650059FA66 /* MainViewController.swift */,
+				68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */,
 				68F161FC2C170DB00059FA66 /* TrendData.swift */,
 			);
-			path = Trend;
+			path = MainVC;
 			sourceTree = "<group>";
 		};
-		68F161EC2C16D88D0059FA66 /* Credit */ = {
+		68F161EC2C16D88D0059FA66 /* DetailVC */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Credit;
+			path = DetailVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,12 +190,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68F161D62C16D5650059FA66 /* TrendViewController.swift in Sources */,
+				68F161D62C16D5650059FA66 /* MainViewController.swift in Sources */,
 				68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */,
 				68F161EE2C16D8B30059FA66 /* ReusableProtocol+.swift in Sources */,
 				68F161E82C16D81D0059FA66 /* APIKey.swift in Sources */,
 				68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */,
-				68F161FB2C16F1010059FA66 /* TrendTableViewCell.swift in Sources */,
+				68F161FB2C16F1010059FA66 /* MainTableViewCell.swift in Sources */,
 				68F161FD2C170DB00059FA66 /* TrendData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

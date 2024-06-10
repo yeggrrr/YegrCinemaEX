@@ -8,8 +8,9 @@
 import UIKit
 import SnapKit
 import Alamofire
+import Kingfisher
 
-class TrendViewController: UIViewController {
+class MainViewController: UIViewController {
     let trendTableView = UITableView()
     var resultList: [Results] = []
     
@@ -26,7 +27,7 @@ class TrendViewController: UIViewController {
         
         trendTableView.delegate = self
         trendTableView.dataSource = self
-        trendTableView.register(TrendTableViewCell.self, forCellReuseIdentifier: TrendTableViewCell.id)
+        trendTableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.id)
         
         view.addSubview(trendTableView)
         trendTableView.snp.makeConstraints {
@@ -48,7 +49,6 @@ class TrendViewController: UIViewController {
     }
     
     func getMovieData() {
-        print(#function)
         let url = APIURL.trendURL
         let header: HTTPHeaders = [
             "Authorization": APIKey.authorization,
@@ -58,8 +58,9 @@ class TrendViewController: UIViewController {
         AF.request(url, method: .get, headers: header).responseDecodable(of: MovieData.self) { response in
             switch response.result {
             case .success(let value):
-                print(value)
+                // print(value)
                 self.resultList = value.results
+                print(self.resultList)
                 self.trendTableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -76,17 +77,32 @@ class TrendViewController: UIViewController {
     }
 }
 
-extension TrendViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 500
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return resultList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TrendTableViewCell.id, for: indexPath) as? TrendTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.id, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
+        cell.backgroundColor = UIColor(named: "cellBackgroundColor")
+        cell.selectionStyle = .none
+        let resultData = resultList[indexPath.row]
+        
+        let posterImage = resultData.poster_path
+        let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
+        cell.posterImageView.kf.setImage(with: url)
+        
+        cell.dateLabel.text = resultData.release_date
+        cell.titleLabel.text = resultData.title
+        
+        let grade = resultData.vote_average
+        let formattedGrade = String(format: "%.1f", grade)
+        cell.gradeNumLabel.text = formattedGrade
+        
         return cell
     }
 }

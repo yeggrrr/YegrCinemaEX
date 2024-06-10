@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TrendTableViewCell: UITableViewCell {
+class MainTableViewCell: UITableViewCell {
     let dateGenreStackView = UIStackView()
     let dateLabel = UILabel()
     let genreLabel = UILabel()
@@ -20,7 +20,7 @@ class TrendTableViewCell: UITableViewCell {
     let gradeLabel = UILabel()
     let gradeNumLabel = UILabel()
     
-    let mainTitleStackView = UIStackView()
+    let mainTitleView = UIView()
     let titleLabel = UILabel()
     let charactersLabel = UILabel()
     let dividerView = UIView()
@@ -45,20 +45,18 @@ class TrendTableViewCell: UITableViewCell {
         
         contentView.addSubview(mainView)
         mainView.addSubview(posterImageView)
-        
         posterImageView.addSubview(clipButton)
-        posterImageView.addSubview(gradeStackeVeiw)
+        
+        mainView.addSubview(mainTitleView)
+        
+        mainView.addSubview(gradeStackeVeiw)
         gradeStackeVeiw.addArrangedSubview(gradeLabel)
         gradeStackeVeiw.addArrangedSubview(gradeNumLabel)
         
-        
-        mainView.addSubview(mainTitleStackView)
-        mainTitleStackView.addArrangedSubview(titleLabel)
-        mainTitleStackView.addArrangedSubview(charactersLabel)
-        
-        mainView.addSubview(dividerView)
-        
-        mainView.addSubview(learnMoreButton)
+        mainTitleView.addSubview(titleLabel)
+        mainTitleView.addSubview(charactersLabel)
+        mainTitleView.addSubview(dividerView)
+        mainTitleView.addSubview(learnMoreButton)
     }
     
     func configureLayout() {
@@ -81,13 +79,13 @@ class TrendTableViewCell: UITableViewCell {
             $0.top.equalTo(dateGenreStackView.snp.bottom).offset(10)
             $0.horizontalEdges.equalTo(safeArea).inset(10)
             $0.height.equalTo(mainView.snp.width)
-            $0.bottom.equalTo(safeArea).offset(-10)
+            $0.bottom.equalTo(safeArea).offset(-20)
         }
         
         posterImageView.snp.makeConstraints {
             $0.top.equalTo(mainView.snp.top)
             $0.horizontalEdges.equalTo(mainView)
-            $0.height.equalTo(mainView).multipliedBy(0.65 / 1.0)
+            $0.bottom.equalTo(mainView.snp.bottom)
         }
         
         clipButton.snp.makeConstraints {
@@ -96,9 +94,16 @@ class TrendTableViewCell: UITableViewCell {
             $0.height.width.equalTo(40)
             
         }
+        
+        mainTitleView.snp.makeConstraints {
+            $0.horizontalEdges.equalTo(mainView)
+            $0.bottom.equalTo(mainView)
+            $0.height.equalTo(mainView).multipliedBy(0.35 / 1.0)
+        }
+        
         gradeStackeVeiw.snp.makeConstraints {
-            $0.leading.equalTo(posterImageView.snp.leading).offset(20)
-            $0.bottom.equalTo(posterImageView.snp.bottom).offset(-20)
+            $0.leading.equalTo(mainView.snp.leading).offset(10)
+            $0.bottom.equalTo(mainTitleView.snp.top).offset(-10)
             $0.height.equalTo(30)
         }
         
@@ -112,37 +117,35 @@ class TrendTableViewCell: UITableViewCell {
             $0.width.equalTo(45)
         }
         
-        mainTitleStackView.snp.makeConstraints {
-            $0.top.equalTo(posterImageView.snp.bottom).offset(15)
-            $0.horizontalEdges.equalTo(mainView).inset(20)
-            $0.height.equalTo(mainView).multipliedBy(0.15 / 1.0)
-        }
-        
         titleLabel.snp.makeConstraints {
-            $0.height.equalTo(mainTitleStackView).multipliedBy(0.6 / 1.0)
+            $0.top.equalTo(mainTitleView.snp.top).offset(20)
+            $0.horizontalEdges.equalTo(mainTitleView)
+            $0.height.equalTo(30)
         }
         
         charactersLabel.snp.makeConstraints {
-            $0.height.equalTo(mainTitleStackView).multipliedBy(0.4 / 1.0)
+            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.horizontalEdges.equalTo(mainTitleView)
+            $0.height.equalTo(20)
         }
         
         dividerView.snp.makeConstraints {
-            $0.top.equalTo(mainTitleStackView.snp.bottom).offset(20)
-            $0.horizontalEdges.equalTo(mainTitleStackView)
+            $0.top.equalTo(charactersLabel.snp.bottom).offset(20)
+            $0.horizontalEdges.equalTo(mainTitleView)
             $0.height.equalTo(1)
         }
         
         learnMoreButton.snp.makeConstraints {
             $0.top.equalTo(dividerView.snp.bottom).offset(10)
-            $0.horizontalEdges.equalTo(mainTitleStackView)
+            $0.horizontalEdges.equalTo(mainTitleView)
             $0.bottom.equalTo(mainView).offset(-10)
         }
+
     }
     
     func configureUI()  {
         dateGenreStackView.axis = .vertical
         
-        dateLabel.text = "12/10/2020"
         dateLabel.textColor = .label
         dateLabel.font = .systemFont(ofSize: 14)
         dateLabel.textAlignment = .left
@@ -156,11 +159,14 @@ class TrendTableViewCell: UITableViewCell {
         mainView.clipsToBounds = true
         
         posterImageView.backgroundColor = .systemGray5
+        posterImageView.contentMode = .scaleAspectFill
         
         clipButton.backgroundColor = .white
         clipButton.setImage(UIImage(systemName: "paperclip"), for: .normal)
         clipButton.tintColor = .black
         clipButton.layer.cornerRadius = 20
+        
+        mainTitleView.backgroundColor = .white
         
         gradeStackeVeiw.backgroundColor = .clear
         gradeStackeVeiw.axis = .horizontal
@@ -173,14 +179,10 @@ class TrendTableViewCell: UITableViewCell {
         gradeLabel.font = .systemFont(ofSize: 15)
         
         gradeNumLabel.backgroundColor = .white
-        gradeNumLabel.text = "3.3"
         gradeNumLabel.textAlignment = .center
         gradeNumLabel.textColor = .label
         gradeNumLabel.font = .systemFont(ofSize: 15)
         
-        mainTitleStackView.axis = .vertical
-        
-        titleLabel.text = "Alice in Borderland"
         titleLabel.textAlignment = .left
         titleLabel.font = .systemFont(ofSize: 22)
         
