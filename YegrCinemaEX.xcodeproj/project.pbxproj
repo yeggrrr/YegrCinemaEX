@@ -21,6 +21,7 @@
 		68F161FB2C16F1010059FA66 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */; };
 		68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FC2C170DB00059FA66 /* MovieData.swift */; };
 		68F161FF2C1769AA0059FA66 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FE2C1769AA0059FA66 /* DateFormatter+.swift */; };
+		68F162012C17DA2B0059FA66 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162002C17DA2B0059FA66 /* UILabel+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		68F161FC2C170DB00059FA66 /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
 		68F161FE2C1769AA0059FA66 /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
+		68F162002C17DA2B0059FA66 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				68F161ED2C16D8B30059FA66 /* ReusableProtocol+.swift */,
 				68F161FE2C1769AA0059FA66 /* DateFormatter+.swift */,
+				68F162002C17DA2B0059FA66 /* UILabel+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F162012C17DA2B0059FA66 /* UILabel+.swift in Sources */,
 				68F161D62C16D5650059FA66 /* MainViewController.swift in Sources */,
 				68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */,
 				68F161EE2C16D8B30059FA66 /* ReusableProtocol+.swift in Sources */,

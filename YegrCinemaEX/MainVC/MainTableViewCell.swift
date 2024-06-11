@@ -148,14 +148,9 @@ class MainTableViewCell: UITableViewCell {
     func configureUI()  {
         dateGenreStackView.axis = .vertical
         
-        dateLabel.textColor = .darkGray
-        dateLabel.font = .systemFont(ofSize: 14)
-        dateLabel.textAlignment = .left
+        dateLabel.setUI(aligment: .left, lbTextColor: .darkGray, fontStyle: .systemFont(ofSize: 14))
         
-        genreLabel.text = "#Mystery"
-        genreLabel.textColor = .label
-        genreLabel.font = .boldSystemFont(ofSize: 20)
-        genreLabel.textAlignment = .left
+        genreLabel.setUI(aligment: .left, lbTextColor: .label, fontStyle: .boldSystemFont(ofSize: 20))
         
         mainView.layer.cornerRadius = 10
         mainView.clipsToBounds = true
@@ -176,25 +171,16 @@ class MainTableViewCell: UITableViewCell {
         gradeStackeVeiw.layer.cornerRadius = 5
         gradeStackeVeiw.clipsToBounds = true
         
+        ScoreLabel.setUI(aligment: .center, lbTextColor: .white, fontStyle: .systemFont(ofSize: 15))
         ScoreLabel.backgroundColor = .systemIndigo
         ScoreLabel.text = "평점"
-        ScoreLabel.textAlignment = .center
-        ScoreLabel.textColor = .white
-        ScoreLabel.font = .systemFont(ofSize: 15)
         
+        ScoreNumLabel.setUI(aligment: .center, lbTextColor: .label, fontStyle: .systemFont(ofSize: 15))
         ScoreNumLabel.backgroundColor = .white
-        ScoreNumLabel.textAlignment = .center
-        ScoreNumLabel.textColor = .label
-        ScoreNumLabel.font = .systemFont(ofSize: 15)
         
-        titleLabel.textAlignment = .left
-        titleLabel.textColor = .label
-        titleLabel.font = .boldSystemFont(ofSize: 22)
+        titleLabel.setUI(aligment: .left, lbTextColor: .label, fontStyle: .boldSystemFont(ofSize: 22))
         
-        charactersLabel.textAlignment = .left
-        charactersLabel.textColor = .darkGray
-        charactersLabel.font = .systemFont(ofSize: 17)
-        
+        charactersLabel.setUI(aligment: .left, lbTextColor: .darkGray, fontStyle: .systemFont(ofSize: 17))
         
         dividerView.backgroundColor = .darkGray
         
