@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
         didSet {
             let allCastFetched = resultList.count == castList.count
             if allCastFetched {
-                print(castList)
+                // print(castList)
                 self.trendTableView.reloadData()
             }
         }

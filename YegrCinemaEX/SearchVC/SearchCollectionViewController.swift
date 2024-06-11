@@ -10,10 +10,15 @@ import SnapKit
 import Alamofire
 import Kingfisher
 
-
 class SearchCollectionViewController: UIViewController {
     let searchBar = UISearchBar()
     let searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    
+    var movieList: [SearchMovie.Results] = [] {
+        didSet {
+            searchCollectionView.reloadData()
+        }
+    }
     
     static func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
@@ -24,7 +29,6 @@ class SearchCollectionViewController: UIViewController {
         layout.minimumInteritemSpacing = 5
         layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         return layout
-        
     }
     
     override func viewDidLoad() {
@@ -35,6 +39,9 @@ class SearchCollectionViewController: UIViewController {
         configureNavigation()
         configureCollectionView()
         configureUI()
+        getMovieData(query: "12") { results in
+            self.movieList = results
+        }
     }
     
     func configureNavigation() {
@@ -64,7 +71,26 @@ class SearchCollectionViewController: UIViewController {
             $0.bottom.equalTo(safeArea)
         }
     }
-
+    
+    func getMovieData(query: String, completion: @escaping ([SearchMovie.Results]) -> Void) {
+        let url = APIURL.searchMovieURL
+        let header: HTTPHeaders = [
+            "Authorization": APIKey.authorization
+        ]
+        let param: Parameters = [
+            "query": query,
+            "language": "ko-KR"
+        ]
+        
+        AF.request(url, method: .get, parameters: param, headers: header).responseDecodable(of: SearchMovie.self) { response in
+            switch response.result {
+            case .success(let value):
+                completion(value.results)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension SearchCollectionViewController: UISearchBarDelegate {
@@ -75,11 +101,13 @@ extension SearchCollectionViewController: UISearchBarDelegate {
 
 extension SearchCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return movieList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.id, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
+        cell.index = indexPath.item
+        cell.configureCell(movieData: movieList)
         return cell
     }
 }

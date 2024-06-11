@@ -27,6 +27,7 @@
 		68F1620E2C18172D0059FA66 /* DetailCastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F1620D2C18172D0059FA66 /* DetailCastTableViewCell.swift */; };
 		68F162172C1867C20059FA66 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162162C1867C20059FA66 /* SearchCollectionViewController.swift */; };
 		68F162192C189D880059FA66 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162182C189D880059FA66 /* SearchCollectionViewCell.swift */; };
+		68F1621B2C18A47C0059FA66 /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F1621A2C18A47C0059FA66 /* SearchData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		68F1620D2C18172D0059FA66 /* DetailCastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCastTableViewCell.swift; sourceTree = "<group>"; };
 		68F162162C1867C20059FA66 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		68F162182C189D880059FA66 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		68F1621A2C18A47C0059FA66 /* SearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +134,9 @@
 		68F162152C18675E0059FA66 /* SearchVC */ = {
 			isa = PBXGroup;
 			children = (
-				68F162162C1867C20059FA66 /* SearchCollectionViewController.swift */,
+				68F1621A2C18A47C0059FA66 /* SearchData.swift */,
 				68F162182C189D880059FA66 /* SearchCollectionViewCell.swift */,
+				68F162162C1867C20059FA66 /* SearchCollectionViewController.swift */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				68F162172C1867C20059FA66 /* SearchCollectionViewController.swift in Sources */,
 				68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */,
 				68F162192C189D880059FA66 /* SearchCollectionViewCell.swift in Sources */,
+				68F1621B2C18A47C0059FA66 /* SearchData.swift in Sources */,
 				68F162052C17E1080059FA66 /* DetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

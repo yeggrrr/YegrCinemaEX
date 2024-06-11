@@ -7,11 +7,13 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class SearchCollectionViewCell: UICollectionViewCell {
     let posterStackView = UIStackView()
     let posterImageView = UIImageView()
     let titleLabel = UILabel()
+    var index: Int?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,10 +47,23 @@ class SearchCollectionViewCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints {
             $0.horizontalEdges.equalTo(posterStackView)
             $0.bottom.equalTo(posterStackView)
-            $0.height.equalTo(20)
+            $0.height.equalTo(17)
         }
         
-        posterImageView.backgroundColor = .systemGray4
-        titleLabel.backgroundColor = .systemGray3
+        posterImageView.contentMode = .scaleToFill
+        titleLabel.backgroundColor = .darkGray
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+    }
+    
+    func configureCell(movieData: [SearchMovie.Results]) {
+        guard let index = index else { return }
+        guard let posterImage = movieData[index].posterPath else { return }
+        let posterImageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
+        
+        posterImageView.kf.setImage(with: posterImageURL)
+        posterImageView.kf.indicatorType = .activity
+        
+        titleLabel.text = movieData[index].title
     }
 }
