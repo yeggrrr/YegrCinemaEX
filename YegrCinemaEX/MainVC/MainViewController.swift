@@ -27,10 +27,14 @@ class MainViewController: UIViewController {
         didSet {
             let allCastFetched = resultList.count == castList.count
             if allCastFetched {
+                print(castList)
                 self.trendTableView.reloadData()
             }
         }
     }
+    
+    var castData: [CreditData.Cast] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +124,7 @@ class MainViewController: UIViewController {
         AF.request(creditsURL, method: .get, parameters: params).responseDecodable(of: CreditData.self) { response in
             switch response.result {
             case .success(let value):
+                self.castData = value.cast
                 let cast = value.cast[0...3]
                     .map{ $0.name }
                     .joined(separator: ", ")
@@ -183,6 +188,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailViewController()
         detailVC.resultData = resultList
+        detailVC.castData = castData
         detailVC.index = indexPath.row
         navigationController?.pushViewController(detailVC, animated: true)
         

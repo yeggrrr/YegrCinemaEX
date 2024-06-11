@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
     let detailTableView = UITableView()
     
     var resultData: [MovieData.Results] = []
+    var castData: [CreditData.Cast] = []
     var index: Int?
     
     override func viewDidLoad() {
@@ -106,7 +107,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             return UITableView.automaticDimension
         } else {
-            return 80
+            return 100
         }
     }
     
@@ -149,6 +150,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             guard let castCell = tableView.dequeueReusableCell(withIdentifier: DetailCastTableViewCell.id, for: indexPath) as? DetailCastTableViewCell else { return UITableViewCell() }
             castCell.selectionStyle = .none
+            castCell.index = indexPath.row
+            castCell.configureCell(castData: castData)
             return castCell
         }
     }

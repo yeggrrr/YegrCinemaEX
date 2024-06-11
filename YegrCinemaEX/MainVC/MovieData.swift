@@ -48,8 +48,16 @@ struct MovieData: Codable {
 struct CreditData: Decodable {
     let cast: [Cast]
     
-    struct Cast: Decodable {
+    struct Cast: Codable {
+        let profilePath: String?
         let name: String
+        let character: String
+        
+        enum CodingKeys: String, CodingKey {
+            case profilePath = "profile_path"
+            case name = "name"
+            case character = "character"
+        }
     }
 }
 

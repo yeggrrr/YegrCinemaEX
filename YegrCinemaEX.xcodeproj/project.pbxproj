@@ -107,9 +107,9 @@
 		68F161EB2C16D87F0059FA66 /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
-				68F161D52C16D5650059FA66 /* MainViewController.swift */,
 				68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */,
 				68F161FC2C170DB00059FA66 /* MovieData.swift */,
+				68F161D52C16D5650059FA66 /* MainViewController.swift */,
 			);
 			path = MainVC;
 			sourceTree = "<group>";
