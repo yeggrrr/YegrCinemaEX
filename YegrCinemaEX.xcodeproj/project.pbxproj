@@ -22,6 +22,8 @@
 		68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FC2C170DB00059FA66 /* MovieData.swift */; };
 		68F161FF2C1769AA0059FA66 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161FE2C1769AA0059FA66 /* DateFormatter+.swift */; };
 		68F162012C17DA2B0059FA66 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162002C17DA2B0059FA66 /* UILabel+.swift */; };
+		68F162032C17DBEF0059FA66 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162022C17DBEF0059FA66 /* DetailViewController.swift */; };
+		68F162052C17E1080059FA66 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162042C17E1080059FA66 /* DetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		68F161FC2C170DB00059FA66 /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
 		68F161FE2C1769AA0059FA66 /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
 		68F162002C17DA2B0059FA66 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		68F162022C17DBEF0059FA66 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		68F162042C17E1080059FA66 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,8 @@
 		68F161EC2C16D88D0059FA66 /* DetailVC */ = {
 			isa = PBXGroup;
 			children = (
+				68F162022C17DBEF0059FA66 /* DetailViewController.swift */,
+				68F162042C17E1080059FA66 /* DetailTableViewCell.swift */,
 			);
 			path = DetailVC;
 			sourceTree = "<group>";
@@ -203,8 +209,10 @@
 				68F161E82C16D81D0059FA66 /* APIKey.swift in Sources */,
 				68F161FF2C1769AA0059FA66 /* DateFormatter+.swift in Sources */,
 				68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */,
+				68F162032C17DBEF0059FA66 /* DetailViewController.swift in Sources */,
 				68F161FB2C16F1010059FA66 /* MainTableViewCell.swift in Sources */,
 				68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */,
+				68F162052C17E1080059FA66 /* DetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

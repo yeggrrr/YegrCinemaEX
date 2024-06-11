@@ -56,7 +56,8 @@ class MainViewController: UIViewController {
     }
     
     func configureNavigation() {
-        navigationController?.navigationBar.topItem?.title = "Trend"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationController?.navigationBar.topItem?.title = .none
         navigationController?.navigationBar.barTintColor = .white
         
         let left = UIBarButtonItem(image: UIImage(systemName: "list.triangle"), style: .plain, target: self, action: #selector(leftBarButtonClicked))
@@ -177,5 +178,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.titleLabel.text = resultData.title
         cell.charactersLabel.text = castData
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        navigationController?.pushViewController(detailVC, animated: true)
+        
     }
 }
