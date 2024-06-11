@@ -22,3 +22,15 @@ extension UIViewController: ReusableProtocol {
         return String(describing: self)
     }
 }
+
+extension UICollectionView: ReusableProtocol {
+    static var id: String {
+        return String(describing: self)
+    }
+}
+
+extension UICollectionViewCell: ReusableProtocol {
+    static var id: String {
+        return String(describing: self)
+    }
+}
