@@ -51,6 +51,8 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
         
         posterImageView.contentMode = .scaleToFill
+        posterImageView.backgroundColor = .systemGray4
+        
         titleLabel.backgroundColor = .darkGray
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center

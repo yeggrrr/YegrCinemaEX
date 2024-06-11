@@ -13,9 +13,12 @@ import Kingfisher
 class SearchCollectionViewController: UIViewController {
     let searchBar = UISearchBar()
     let searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    var page = 1
+    var lastPage: Int?
     
     var movieList: [SearchMovie.Results] = [] {
         didSet {
+            
             searchCollectionView.reloadData()
         }
     }
@@ -33,28 +36,25 @@ class SearchCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
         
-        configureNavigation()
-        configureCollectionView()
         configureUI()
-        getMovieData(query: "12") { results in
-            self.movieList = results
-        }
-    }
-    
-    func configureNavigation() {
-        navigationItem.title = "영화 검색"
-    }
-    
-    func configureCollectionView() {
-        searchCollectionView.delegate = self
-        searchCollectionView.dataSource = self
-        searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.id)
+        configureLayout()
     }
     
     func configureUI() {
+        navigationItem.title = "영화 검색"
+        view.backgroundColor = .white
+        
+        searchCollectionView.delegate = self
+        searchCollectionView.dataSource = self
+        searchCollectionView.prefetchDataSource = self
+        searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.id)
+        
+        searchBar.delegate = self
+        searchBar.placeholder = "영화 제목을 입력하세요"
+    }
+    
+    func configureLayout() {
         view.addSubview(searchBar)
         view.addSubview(searchCollectionView)
         
@@ -72,20 +72,23 @@ class SearchCollectionViewController: UIViewController {
         }
     }
     
-    func getMovieData(query: String, completion: @escaping ([SearchMovie.Results]) -> Void) {
+    func getMovieData(query: String, page: Int, completion: @escaping ([SearchMovie.Results]) -> Void) {
         let url = APIURL.searchMovieURL
         let header: HTTPHeaders = [
             "Authorization": APIKey.authorization
         ]
+        
         let param: Parameters = [
             "query": query,
-            "language": "ko-KR"
+            "language": "ko-KR",
+            "page": page
         ]
         
         AF.request(url, method: .get, parameters: param, headers: header).responseDecodable(of: SearchMovie.self) { response in
             switch response.result {
             case .success(let value):
                 completion(value.results)
+                self.lastPage = value.totalPages
             case .failure(let error):
                 print(error)
             }
@@ -95,7 +98,17 @@ class SearchCollectionViewController: UIViewController {
 
 extension SearchCollectionViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(#function)
+        searchCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        page = 1
+        movieList.removeAll()
+        guard let text = searchBar.text else { return }
+        getMovieData(query: text, page: 1) { results in
+            if self.page == 1 {
+                self.movieList = results
+            } else {
+                self.movieList.append(contentsOf: results)
+            }
+        }
     }
 }
 
@@ -109,5 +122,22 @@ extension SearchCollectionViewController: UICollectionViewDelegate, UICollection
         cell.index = indexPath.item
         cell.configureCell(movieData: movieList)
         return cell
+    }
+}
+
+extension SearchCollectionViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        guard let lastPage = lastPage else { return }
+        for indexPath in indexPaths {
+            if lastPage != page {
+                if 20 * (page - 1) < indexPath.item {
+                    page += 1
+                    guard let text = searchBar.text else { return }
+                    getMovieData(query: text, page: page) { results in
+                        self.movieList.append(contentsOf: results)
+                    }
+                }
+            }
+        }
     }
 }
