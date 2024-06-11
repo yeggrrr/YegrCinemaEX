@@ -25,6 +25,7 @@
 		68F162032C17DBEF0059FA66 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162022C17DBEF0059FA66 /* DetailViewController.swift */; };
 		68F162052C17E1080059FA66 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162042C17E1080059FA66 /* DetailTableViewCell.swift */; };
 		68F1620E2C18172D0059FA66 /* DetailCastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F1620D2C18172D0059FA66 /* DetailCastTableViewCell.swift */; };
+		68F162172C1867C20059FA66 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162162C1867C20059FA66 /* SearchCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		68F162022C17DBEF0059FA66 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		68F162042C17E1080059FA66 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		68F1620D2C18172D0059FA66 /* DetailCastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCastTableViewCell.swift; sourceTree = "<group>"; };
+		68F162162C1867C20059FA66 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				68F161DC2C16D5660059FA66 /* LaunchScreen.storyboard */,
 				68F161EB2C16D87F0059FA66 /* MainVC */,
 				68F161EC2C16D88D0059FA66 /* DetailVC */,
+				68F162152C18675E0059FA66 /* SearchVC */,
 				68F161E92C16D8570059FA66 /* Extension */,
 				68F161DF2C16D5660059FA66 /* Info.plist */,
 				68F161E72C16D81D0059FA66 /* APIKey.swift */,
@@ -122,6 +125,14 @@
 				68F162022C17DBEF0059FA66 /* DetailViewController.swift */,
 			);
 			path = DetailVC;
+			sourceTree = "<group>";
+		};
+		68F162152C18675E0059FA66 /* SearchVC */ = {
+			isa = PBXGroup;
+			children = (
+				68F162162C1867C20059FA66 /* SearchCollectionViewController.swift */,
+			);
+			path = SearchVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +226,7 @@
 				68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */,
 				68F162032C17DBEF0059FA66 /* DetailViewController.swift in Sources */,
 				68F161FB2C16F1010059FA66 /* MainTableViewCell.swift in Sources */,
+				68F162172C1867C20059FA66 /* SearchCollectionViewController.swift in Sources */,
 				68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */,
 				68F162052C17E1080059FA66 /* DetailTableViewCell.swift in Sources */,
 			);

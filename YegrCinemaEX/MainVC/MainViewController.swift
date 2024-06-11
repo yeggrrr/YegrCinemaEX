@@ -152,7 +152,8 @@ class MainViewController: UIViewController {
     }
     
     @objc func rightBarButtonClicked() {
-        
+        let SearchVC = SearchCollectionViewController()
+        navigationController?.pushViewController(SearchVC, animated: true)
     }
 }
 
