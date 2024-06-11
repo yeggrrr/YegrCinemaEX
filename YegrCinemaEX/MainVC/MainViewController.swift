@@ -182,6 +182,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailViewController()
+        detailVC.resultData = resultList
+        detailVC.index = indexPath.row
         navigationController?.pushViewController(detailVC, animated: true)
         
     }

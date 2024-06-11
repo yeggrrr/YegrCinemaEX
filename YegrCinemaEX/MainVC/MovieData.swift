@@ -22,6 +22,7 @@ struct MovieData: Codable {
     
     struct Results: Codable {
         let id: Int
+        let backdropPath: String
         let overview: String
         let posterPath: String
         let mediaType: String
@@ -32,6 +33,7 @@ struct MovieData: Codable {
         
         enum CodingKeys: String, CodingKey {
             case id = "id"
+            case backdropPath = "backdrop_path"
             case overview = "overview"
             case posterPath = "poster_path"
             case mediaType = "media_type"

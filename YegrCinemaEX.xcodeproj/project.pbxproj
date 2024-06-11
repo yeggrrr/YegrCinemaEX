@@ -24,6 +24,7 @@
 		68F162012C17DA2B0059FA66 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162002C17DA2B0059FA66 /* UILabel+.swift */; };
 		68F162032C17DBEF0059FA66 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162022C17DBEF0059FA66 /* DetailViewController.swift */; };
 		68F162052C17E1080059FA66 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F162042C17E1080059FA66 /* DetailTableViewCell.swift */; };
+		68F1620E2C18172D0059FA66 /* DetailCastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F1620D2C18172D0059FA66 /* DetailCastTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		68F162002C17DA2B0059FA66 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		68F162022C17DBEF0059FA66 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		68F162042C17E1080059FA66 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		68F1620D2C18172D0059FA66 /* DetailCastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCastTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +117,9 @@
 		68F161EC2C16D88D0059FA66 /* DetailVC */ = {
 			isa = PBXGroup;
 			children = (
-				68F162022C17DBEF0059FA66 /* DetailViewController.swift */,
+				68F1620D2C18172D0059FA66 /* DetailCastTableViewCell.swift */,
 				68F162042C17E1080059FA66 /* DetailTableViewCell.swift */,
+				68F162022C17DBEF0059FA66 /* DetailViewController.swift */,
 			);
 			path = DetailVC;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */,
 				68F161EE2C16D8B30059FA66 /* ReusableProtocol+.swift in Sources */,
 				68F161E82C16D81D0059FA66 /* APIKey.swift in Sources */,
+				68F1620E2C18172D0059FA66 /* DetailCastTableViewCell.swift in Sources */,
 				68F161FF2C1769AA0059FA66 /* DateFormatter+.swift in Sources */,
 				68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */,
 				68F162032C17DBEF0059FA66 /* DetailViewController.swift in Sources */,
