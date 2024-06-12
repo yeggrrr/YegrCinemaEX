@@ -53,9 +53,8 @@ class SearchCollectionViewCell: UICollectionViewCell {
         posterImageView.contentMode = .scaleToFill
         posterImageView.backgroundColor = .systemGray4
         
+        titleLabel.setUI(aligment: .center, lbTextColor: .white, fontStyle: .boldSystemFont(ofSize: 15))
         titleLabel.backgroundColor = .darkGray
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .center
     }
     
     func configureCell(movieData: [SearchMovie.Results]) {

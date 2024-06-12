@@ -47,10 +47,8 @@ class DetailOverViewTableViewCell: UITableViewCell {
         
         overViewLabel.setUI(aligment: .left, lbTextColor: .label, fontStyle: .systemFont(ofSize: 15))
         overViewLabel.numberOfLines = 2
-        
         dropDownButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         dropDownButton.tintColor = .black
-        
         dropDownButton.addTarget(self, action: #selector(dropDownButtonClicked), for: .touchUpInside)
     }
     

@@ -88,16 +88,13 @@ class DetailViewController: UIViewController {
     func setViewData() {
         guard let index = index else { return }
         
-        // posterImageView
         let backImage = resultData[index].backdropPath
-        let backImageURL = URL(string: "https://image.tmdb.org/t/p/w500\(backImage)")
-        posterImageView.kf.setImage(with: backImageURL)
-        
-        // titleLabel
-        titleLabel.text = resultData[index].title
-        // subposterImageView
         let posterImage = resultData[index].posterPath
+        let backImageURL = URL(string: "https://image.tmdb.org/t/p/w500\(backImage)")
         let posterImageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
+        
+        posterImageView.kf.setImage(with: backImageURL)
+        titleLabel.text = resultData[index].title
         subposterImageView.kf.setImage(with: posterImageURL)
     }
 }

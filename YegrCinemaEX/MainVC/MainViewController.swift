@@ -27,14 +27,12 @@ class MainViewController: UIViewController {
         didSet {
             let allCastFetched = resultList.count == castList.count
             if allCastFetched {
-                // print(castList)
                 self.trendTableView.reloadData()
             }
         }
     }
     
     var castData: [CreditData.Cast] = []
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
