@@ -18,20 +18,8 @@ class SearchCollectionViewController: UIViewController {
     
     var movieList: [SearchMovie.Results] = [] {
         didSet {
-            
             searchCollectionView.reloadData()
         }
-    }
-    
-    static func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        let width = UIScreen.main.bounds.width - 20
-        layout.itemSize = CGSize(width:  width / 3, height: width / 3)
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 5
-        layout.minimumInteritemSpacing = 5
-        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        return layout
     }
     
     override func viewDidLoad() {
@@ -70,6 +58,17 @@ class SearchCollectionViewController: UIViewController {
             $0.horizontalEdges.equalTo(safeArea)
             $0.bottom.equalTo(view)
         }
+    }
+    
+    static func collectionViewLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        let width = UIScreen.main.bounds.width - 20
+        layout.itemSize = CGSize(width:  width / 3, height: width / 3)
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 5
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        return layout
     }
     
     func getMovieData(query: String, page: Int, completion: @escaping ([SearchMovie.Results]) -> Void) {

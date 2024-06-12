@@ -147,9 +147,7 @@ class MainTableViewCell: UITableViewCell {
     
     func configureUI()  {
         dateGenreStackView.axis = .vertical
-        
         dateLabel.setUI(aligment: .left, lbTextColor: .darkGray, fontStyle: .systemFont(ofSize: 14))
-        
         genreLabel.setUI(aligment: .left, lbTextColor: .label, fontStyle: .boldSystemFont(ofSize: 20))
         
         mainView.layer.cornerRadius = 10
@@ -174,12 +172,10 @@ class MainTableViewCell: UITableViewCell {
         ScoreLabel.setUI(aligment: .center, lbTextColor: .white, fontStyle: .systemFont(ofSize: 15))
         ScoreLabel.backgroundColor = .systemIndigo
         ScoreLabel.text = "평점"
-        
         ScoreNumLabel.setUI(aligment: .center, lbTextColor: .label, fontStyle: .systemFont(ofSize: 15))
         ScoreNumLabel.backgroundColor = .white
         
         titleLabel.setUI(aligment: .left, lbTextColor: .label, fontStyle: .boldSystemFont(ofSize: 22))
-        
         charactersLabel.setUI(aligment: .left, lbTextColor: .darkGray, fontStyle: .systemFont(ofSize: 17))
         
         dividerView.backgroundColor = .darkGray

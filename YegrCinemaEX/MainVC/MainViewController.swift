@@ -77,6 +77,7 @@ class MainViewController: UIViewController {
             "Authorization": APIKey.authorization,
             "accept": APIKey.accept
         ]
+        
         let params: Parameters  =  [
             "api_key": APIKey.apiKey
         ]
@@ -146,7 +147,6 @@ class MainViewController: UIViewController {
     }
     
     @objc func leftBarButtonClicked() {
-        
     }
     
     @objc func rightBarButtonClicked() {
@@ -190,6 +190,5 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         detailVC.castData = castData
         detailVC.index = indexPath.row
         navigationController?.pushViewController(detailVC, animated: true)
-        
     }
 }
