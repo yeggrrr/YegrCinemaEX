@@ -68,7 +68,7 @@ class SearchCollectionViewController: UIViewController {
         searchCollectionView.snp.makeConstraints {
             $0.top.equalTo(searchBar.snp.bottom)
             $0.horizontalEdges.equalTo(safeArea)
-            $0.bottom.equalTo(safeArea)
+            $0.bottom.equalTo(view)
         }
     }
     
