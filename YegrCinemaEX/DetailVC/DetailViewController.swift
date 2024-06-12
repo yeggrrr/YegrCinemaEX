@@ -30,10 +30,8 @@ class DetailViewController: UIViewController {
     }
     
     func configureUI() {
-        // container View
         view.backgroundColor = .white
-        // navigation
-        title = "출연/제작"
+        navigationItem.title = "출연/제작"
     }
     
     func configureTableView() {
@@ -114,12 +112,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             return "Casts"
         }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
