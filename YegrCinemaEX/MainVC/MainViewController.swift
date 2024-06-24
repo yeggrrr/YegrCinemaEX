@@ -72,40 +72,14 @@ class MainViewController: UIViewController {
     }
     
     func getGenreData() {
-        let url = APIURL.genreMovieListURL
-        let header: HTTPHeaders = [
-            "Authorization": APIKey.authorization,
-            "accept": APIKey.accept
-        ]
-        
-        let params: Parameters  =  [
-            "api_key": APIKey.apiKey
-        ]
-        
-        AF.request(url, method: .get, parameters: params, headers: header).responseDecodable(of: GenreData.self) { response in
-            switch response.result {
-            case .success(let value):
-                self.genreList = value.genres
-            case .failure(let error):
-                print(error)
-            }
+        APICall.shared.getGenreData { genreData in
+            self.genreList = genreData.genres
         }
     }
     
     func getMovieData() {
-        let url = APIURL.trendingMovieURL
-        let header: HTTPHeaders = [
-            "Authorization": APIKey.authorization,
-            "accept": APIKey.accept
-        ]
-        
-        AF.request(url, method: .get, headers: header).responseDecodable(of: MovieData.self) { response in
-            switch response.result {
-            case .success(let value):
-                self.resultList = value.results
-            case .failure(let error):
-                print(error)
-            }
+        APICall.shared.getMovieData { movieData in
+            self.resultList = movieData.results
         }
     }
     

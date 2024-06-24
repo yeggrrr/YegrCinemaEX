@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6860522F2C2957E000D60EA0 /* MovieDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6860522E2C2957E000D60EA0 /* MovieDataManager.swift */; };
 		68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D12C16D5650059FA66 /* AppDelegate.swift */; };
 		68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D32C16D5650059FA66 /* SceneDelegate.swift */; };
 		68F161D62C16D5650059FA66 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D52C16D5650059FA66 /* MainViewController.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6860522E2C2957E000D60EA0 /* MovieDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataManager.swift; sourceTree = "<group>"; };
 		68F161CE2C16D5650059FA66 /* YegrCinemaEX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YegrCinemaEX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F161D12C16D5650059FA66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68F161D32C16D5650059FA66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6860522D2C2957BE00D60EA0 /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				6860522E2C2957E000D60EA0 /* MovieDataManager.swift */,
+			);
+			path = APIManager;
+			sourceTree = "<group>";
+		};
 		68F161C52C16D5650059FA66 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 				68F161D32C16D5650059FA66 /* SceneDelegate.swift */,
 				68F161DA2C16D5660059FA66 /* Assets.xcassets */,
 				68F161DC2C16D5660059FA66 /* LaunchScreen.storyboard */,
+				6860522D2C2957BE00D60EA0 /* APIManager */,
 				68F161EB2C16D87F0059FA66 /* MainVC */,
 				68F161EC2C16D88D0059FA66 /* DetailVC */,
 				68F162152C18675E0059FA66 /* SearchVC */,
@@ -236,6 +247,7 @@
 				68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */,
 				68F162192C189D880059FA66 /* SearchCollectionViewCell.swift in Sources */,
 				68F1621B2C18A47C0059FA66 /* SearchData.swift in Sources */,
+				6860522F2C2957E000D60EA0 /* MovieDataManager.swift in Sources */,
 				68F162052C17E1080059FA66 /* DetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
