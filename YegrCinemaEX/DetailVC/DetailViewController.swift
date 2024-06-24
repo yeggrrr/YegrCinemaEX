@@ -127,14 +127,11 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        index = indexPath.row
-        
         if indexPath.section == 0 {
             guard let overViewCell = tableView.dequeueReusableCell(withIdentifier: DetailOverViewTableViewCell.id, for: indexPath) as? DetailOverViewTableViewCell else { return UITableViewCell() }
             overViewCell.selectionStyle = .none
             overViewCell.tableVew = detailTableView
-            overViewCell.index = indexPath.row
-            overViewCell.configureCell(overViewData: resultData)
+            overViewCell.configureCell(overViewData: resultData[indexPath.row])
             return overViewCell
         } else {
             guard let castCell = tableView.dequeueReusableCell(withIdentifier: DetailCastTableViewCell.id, for: indexPath) as? DetailCastTableViewCell else { return UITableViewCell() }

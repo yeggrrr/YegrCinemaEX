@@ -17,12 +17,19 @@ class MainViewController: UIViewController {
         didSet {
             let idList = resultList.map { $0.id }
             for id in idList {
-                getCreditsData(id: id) { casts in
+                APICall.shared.getCreditsData(id: id) { creditData in
+                    self.castData.append(creditData.cast)
+                    let casts = creditData.cast[0...3]
+                        .map{ $0.name }
+                        .joined(separator: ", ")
                     self.castList.append(casts)
                 }
             }
         }
     }
+    
+    
+    
     var castList: [String] = [] {
         didSet {
             let allCastFetched = resultList.count == castList.count
@@ -32,11 +39,11 @@ class MainViewController: UIViewController {
         }
     }
     
-    var castData: [CreditData.Cast] = []
+    var castData: [[CreditData.Cast]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
         configureNavigation()
         configureUI()
         getGenreData()
@@ -83,32 +90,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    func getCreditsData(id: Int, completion: @escaping (String) -> Void) {
-        let url = "\(APIURL.movieURL)\(id)/credits"
-        guard let creditsURL = URL(string: url) else {
-            completion("-")
-            return
-        }
-        
-        let params: Parameters  =  [
-            "api_key": APIKey.apiKey
-        ]
-        
-        AF.request(creditsURL, method: .get, parameters: params).responseDecodable(of: CreditData.self) { response in
-            switch response.result {
-            case .success(let value):
-                self.castData = value.cast
-                let cast = value.cast[0...3]
-                    .map{ $0.name }
-                    .joined(separator: ", ")
-                completion(cast)
-            case .failure(let error):
-                print(error)
-                completion("-")
-            }
-        }
-    }
-
     func makeGenreText(item: MovieData.Results) -> String {
         guard let genreId = item.genreIds.first else { return "# -" }
         guard let genre = genreList.filter({ $0.id == genreId }).first else { return "# -" }
@@ -159,9 +140,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let casts = castData[indexPath.row]
         let detailVC = DetailViewController()
         detailVC.resultData = resultList
-        detailVC.castData = castData
+        detailVC.castData = casts
         detailVC.index = indexPath.row
         navigationController?.pushViewController(detailVC, animated: true)
     }

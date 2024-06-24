@@ -13,7 +13,6 @@ class DetailOverViewTableViewCell: UITableViewCell {
     let dropDownButton = UIButton()
     var buttonState = false
     var tableVew: UITableView?
-    var index: Int?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -52,9 +51,8 @@ class DetailOverViewTableViewCell: UITableViewCell {
         dropDownButton.addTarget(self, action: #selector(dropDownButtonClicked), for: .touchUpInside)
     }
     
-    func configureCell(overViewData: [MovieData.Results]) {
-        guard let index = index else { return }
-        overViewLabel.text = overViewData[index].overview
+    func configureCell(overViewData: MovieData.Results) {
+        overViewLabel.text = overViewData.overview
     }
     
     @objc func dropDownButtonClicked() {
