@@ -102,11 +102,17 @@ class MainViewController: UIViewController {
     }
     
     @objc func leftBarButtonClicked() {
+        print(#function)
     }
     
     @objc func rightBarButtonClicked() {
-        let SearchVC = SearchCollectionViewController()
-        navigationController?.pushViewController(SearchVC, animated: true)
+        let searchVC = SearchCollectionViewController()
+        navigationController?.pushViewController(searchVC, animated: true)
+    }
+    
+    @objc func clipButtonClicked() {
+        let recommendVC = RelatedMoviesViewController()
+        navigationController?.pushViewController(recommendVC, animated: true)
     }
 }
 
@@ -136,6 +142,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.ScoreNumLabel.text = makeScoreText(item: resultData)
         cell.titleLabel.text = resultData.title
         cell.charactersLabel.text = castData
+        
+        cell.clipButton.addTarget(self, action: #selector(clipButtonClicked), for: .touchUpInside)
         return cell
     }
     
