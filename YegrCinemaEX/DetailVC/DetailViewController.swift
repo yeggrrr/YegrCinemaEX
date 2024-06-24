@@ -16,9 +16,8 @@ class DetailViewController: UIViewController {
     let subposterImageView = UIImageView()
     let detailTableView = UITableView()
     
-    var resultData: [MovieData.Results] = []
+    var selectedMovie: MovieData.Results?
     var castData: [CreditData.Cast] = []
-    var index: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,15 +83,14 @@ class DetailViewController: UIViewController {
     }
     
     func setViewData() {
-        guard let index = index else { return }
-        
-        let backImage = resultData[index].backdropPath
-        let posterImage = resultData[index].posterPath
+        guard let selectedMovie = selectedMovie else { return }
+        let backImage = selectedMovie.backdropPath
+        let posterImage = selectedMovie.posterPath
         let backImageURL = URL(string: "https://image.tmdb.org/t/p/w500\(backImage)")
         let posterImageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
         
         posterImageView.kf.setImage(with: backImageURL)
-        titleLabel.text = resultData[index].title
+        titleLabel.text = selectedMovie.title
         subposterImageView.kf.setImage(with: posterImageURL)
     }
 }
@@ -131,7 +129,9 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             guard let overViewCell = tableView.dequeueReusableCell(withIdentifier: DetailOverViewTableViewCell.id, for: indexPath) as? DetailOverViewTableViewCell else { return UITableViewCell() }
             overViewCell.selectionStyle = .none
             overViewCell.tableVew = detailTableView
-            overViewCell.configureCell(overViewData: resultData[indexPath.row])
+            if let selectedMovie = selectedMovie {
+                overViewCell.configureCell(overViewData: selectedMovie)
+            }
             return overViewCell
         } else {
             guard let castCell = tableView.dequeueReusableCell(withIdentifier: DetailCastTableViewCell.id, for: indexPath) as? DetailCastTableViewCell else { return UITableViewCell() }

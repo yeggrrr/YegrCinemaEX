@@ -16,30 +16,23 @@ class MainViewController: UIViewController {
     var resultList: [MovieData.Results] = [] {
         didSet {
             let idList = resultList.map { $0.id }
+            
             for id in idList {
                 APICall.shared.getCreditsData(id: id) { creditData in
                     self.castData.append(creditData.cast)
-                    let casts = creditData.cast[0...3]
-                        .map{ $0.name }
-                        .joined(separator: ", ")
-                    self.castList.append(casts)
                 }
             }
         }
     }
     
-    
-    
-    var castList: [String] = [] {
+    var castData: [[CreditData.Cast]] = [] {
         didSet {
-            let allCastFetched = resultList.count == castList.count
+            let allCastFetched = resultList.count == castData.count
             if allCastFetched {
                 self.trendTableView.reloadData()
             }
         }
     }
-    
-    var castData: [[CreditData.Cast]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +94,13 @@ class MainViewController: UIViewController {
         return String(format: "%.1f", grade)
     }
     
+    func makeCastText(cast: [CreditData.Cast]) -> String {
+        let casts = cast[0...3]
+            .map{ $0.name }
+            .joined(separator: ", ")
+        return casts
+    }
+    
     @objc func leftBarButtonClicked() {
         print(#function)
     }
@@ -110,9 +110,12 @@ class MainViewController: UIViewController {
         navigationController?.pushViewController(searchVC, animated: true)
     }
     
-    @objc func clipButtonClicked() {
-        let recommendVC = RelatedMoviesViewController()
-        navigationController?.pushViewController(recommendVC, animated: true)
+    @objc func clipButtonClicked(_ sender: UIButton) {
+        let item = resultList[sender.tag]
+        let relatedMoviesVC = RelatedMoviesViewController()
+        relatedMoviesVC.movieTitle = item.title
+        relatedMoviesVC.id = item.id
+        navigationController?.pushViewController(relatedMoviesVC, animated: true)
     }
 }
 
@@ -128,7 +131,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.id, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
         let resultData = resultList[indexPath.row]
-        let castData = castList[indexPath.row]
+        let castData = castData[indexPath.row]
         
         cell.backgroundColor = UIColor(named: "cellBackgroundColor")
         cell.selectionStyle = .none
@@ -141,18 +144,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.posterImageView.kf.setImage(with: url)
         cell.ScoreNumLabel.text = makeScoreText(item: resultData)
         cell.titleLabel.text = resultData.title
-        cell.charactersLabel.text = castData
+        cell.charactersLabel.text = makeCastText(cast: castData)
         
+        cell.clipButton.tag = indexPath.row
         cell.clipButton.addTarget(self, action: #selector(clipButtonClicked), for: .touchUpInside)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let casts = castData[indexPath.row]
         let detailVC = DetailViewController()
-        detailVC.resultData = resultList
+        detailVC.selectedMovie = resultList[indexPath.row]
+        let casts = castData[indexPath.row]
         detailVC.castData = casts
-        detailVC.index = indexPath.row
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
