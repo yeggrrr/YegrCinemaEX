@@ -1,5 +1,5 @@
 //
-//  SimilarCollectionViewCell.swift
+//  RecommendCollectionViewCell.swift
 //  YegrCinemaEX
 //
 //  Created by YJ on 6/24/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SimilarCollectionViewCell: UICollectionViewCell {
+class RecommendCollectionViewCell: UICollectionViewCell {
     let posterImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -23,6 +23,12 @@ class SimilarCollectionViewCell: UICollectionViewCell {
         configureUI()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        configureUI()
+    }
+    
     func configureUI() {
         contentView.addSubview(posterImageView)
         posterImageView.snp.makeConstraints {
@@ -30,6 +36,7 @@ class SimilarCollectionViewCell: UICollectionViewCell {
             $0.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
         }
         
+        posterImageView.contentMode = .scaleAspectFit
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = 10
     }

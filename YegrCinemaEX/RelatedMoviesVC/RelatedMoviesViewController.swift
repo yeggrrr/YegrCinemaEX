@@ -9,20 +9,94 @@ import UIKit
 import SnapKit
 
 class RelatedMoviesViewController: UIViewController {
+    enum CellType: Int {
+        case similar = 0
+        case recommend = 1
+        case poster = 2
+    }
+    
+    let movieTitleLabel = UILabel()
     let relatedMoviesTableView = UITableView()
+    let cellTypeList: [CellType] = [.similar, .recommend, .poster]
+    
+    var movieTitle: String?
+    var id: Int?
+    var similarDataList: SimilarData? {
+        didSet {
+            relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.similar.rawValue, section: 0)], with: .automatic)
+        }
+    }
+    var recommendDataList: RecommendData? {
+        didSet {
+            relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.recommend.rawValue, section: 0)], with: .automatic)
+        }
+    }
+    var posterDataList: PosterImageData? {
+        didSet {
+            relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.poster.rawValue, section: 0)], with: .automatic)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .lightGray
         configureNavigation()
+        configureUI()
         configureTableView()
+        
+        if let id = id {
+            getData(id: id)
+        }
+    }
+    
+    func getData(id: Int) {
+        APICall.shared.getSimilarData(id: id) { similarData in
+            self.similarDataList = similarData
+        }
+        
+        APICall.shared.getRecommendData(id: id) { recommendData in
+            self.recommendDataList = recommendData
+        }
+        
+        APICall.shared.getPosterData(id: id) { posterData in
+            self.posterDataList = posterData
+        }
     }
     
     func configureNavigation() {
         let right = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(moreInfoButtonClicked))
         navigationItem.rightBarButtonItem = right
         navigationItem.rightBarButtonItem?.tintColor = .black
+    }
+    
+    func configureUI() {
+        view.backgroundColor = .white
+        
+        view.addSubview(movieTitleLabel)
+        view.addSubview(relatedMoviesTableView)
+        
+        let safeArea = view.safeAreaLayoutGuide
+        movieTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(safeArea).offset(10)
+            $0.leading.equalTo(safeArea).offset(10)
+            $0.height.equalTo(30)
+        }
+        
+        relatedMoviesTableView.snp.makeConstraints {
+            $0.top.equalTo(movieTitleLabel.snp.bottom).offset(5)
+            $0.horizontalEdges.equalTo(safeArea)
+            $0.bottom.equalTo(view)
+        }
+        
+        if let movieTitle = movieTitle {
+            movieTitleLabel.text = movieTitle
+        } else {
+            movieTitleLabel.text = "선택한 영화 관련 추천"
+        }
+        
+        movieTitleLabel.textColor = .black
+        movieTitleLabel.textAlignment = .left
+        movieTitleLabel.font = .systemFont(ofSize: 25, weight: .bold)
     }
     
     func configureTableView() {
@@ -32,12 +106,6 @@ class RelatedMoviesViewController: UIViewController {
         relatedMoviesTableView.register(SimilarTableViewCell.self, forCellReuseIdentifier: SimilarTableViewCell.id)
         relatedMoviesTableView.register(RecommendTableViewCell.self, forCellReuseIdentifier: RecommendTableViewCell.id)
         relatedMoviesTableView.register(PosterTableViewCell.self, forCellReuseIdentifier: PosterTableViewCell.id)
-        
-        view.addSubview(relatedMoviesTableView)
-        relatedMoviesTableView.snp.makeConstraints {
-            $0.edges.equalTo(view)
-        }
-        
     }
 
     @objc func moreInfoButtonClicked() {
@@ -47,31 +115,41 @@ class RelatedMoviesViewController: UIViewController {
 
 extension RelatedMoviesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        switch cellTypeList[indexPath.row] {
+        case .similar, .recommend:
             return 220
-        } else if indexPath.row == 1 {
-            return 220
-        } else {
-            return 300
+        case .poster:
+            return 280
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return cellTypeList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            guard let similarCell = tableView.dequeueReusableCell(withIdentifier: SimilarTableViewCell.id, for: indexPath) as? SimilarTableViewCell else { return UITableViewCell() }
+        switch cellTypeList[indexPath.row] {
+        case .similar:
+            guard let similarDataList = similarDataList else { return UITableViewCell() }
+            
+            let similarCell = SimilarTableViewCell()
             similarCell.selectionStyle = .none
+            similarCell.configureData(similarResults: similarDataList.results)
             return similarCell
-        } else if indexPath.row == 1 {
-            guard let recommendCell = tableView.dequeueReusableCell(withIdentifier: RecommendTableViewCell.id, for: indexPath) as? RecommendTableViewCell else { return UITableViewCell() }
+        case .recommend:
+            guard let recommendDataList = recommendDataList else { return UITableViewCell() }
+            
+            let recommendCell = RecommendTableViewCell()
             recommendCell.selectionStyle = .none
+            recommendCell.configureData(recommendResults: recommendDataList.results)
             return recommendCell
-        } else {
-            guard let posterCell = tableView.dequeueReusableCell(withIdentifier: PosterTableViewCell.id, for: indexPath) as? PosterTableViewCell else { return UITableViewCell() }
+        case .poster:
+            guard let posterDataList = posterDataList else { return UITableViewCell() }
+            
+            let posterCell = PosterTableViewCell()
             posterCell.selectionStyle = .none
+            posterCell.configureData(posterResults: posterDataList.backdrops)
+            posterCell.posterCollectionView.reloadData()
             return posterCell
         }
     }

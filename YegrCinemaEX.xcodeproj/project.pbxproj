@@ -13,6 +13,11 @@
 		686052382C29824D00D60EA0 /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052372C29824D00D60EA0 /* RecommendTableViewCell.swift */; };
 		6860523A2C29825F00D60EA0 /* PosterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052392C29825F00D60EA0 /* PosterTableViewCell.swift */; };
 		6860523C2C298F9B00D60EA0 /* SimilarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6860523B2C298F9B00D60EA0 /* SimilarCollectionViewCell.swift */; };
+		686052422C29961A00D60EA0 /* RecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052412C29961A00D60EA0 /* RecommendCollectionViewCell.swift */; };
+		686052442C2996DE00D60EA0 /* PosterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052432C2996DE00D60EA0 /* PosterCollectionViewCell.swift */; };
+		686052462C299CCE00D60EA0 /* SimilarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052452C299CCE00D60EA0 /* SimilarData.swift */; };
+		6860524B2C29B07100D60EA0 /* RecommendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6860524A2C29B07100D60EA0 /* RecommendData.swift */; };
+		6860524E2C29B2D600D60EA0 /* PosterImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6860524D2C29B2D600D60EA0 /* PosterImageData.swift */; };
 		68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D12C16D5650059FA66 /* AppDelegate.swift */; };
 		68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D32C16D5650059FA66 /* SceneDelegate.swift */; };
 		68F161D62C16D5650059FA66 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D52C16D5650059FA66 /* MainViewController.swift */; };
@@ -43,6 +48,11 @@
 		686052372C29824D00D60EA0 /* RecommendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendTableViewCell.swift; sourceTree = "<group>"; };
 		686052392C29825F00D60EA0 /* PosterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterTableViewCell.swift; sourceTree = "<group>"; };
 		6860523B2C298F9B00D60EA0 /* SimilarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarCollectionViewCell.swift; sourceTree = "<group>"; };
+		686052412C29961A00D60EA0 /* RecommendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCollectionViewCell.swift; sourceTree = "<group>"; };
+		686052432C2996DE00D60EA0 /* PosterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCollectionViewCell.swift; sourceTree = "<group>"; };
+		686052452C299CCE00D60EA0 /* SimilarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarData.swift; sourceTree = "<group>"; };
+		6860524A2C29B07100D60EA0 /* RecommendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendData.swift; sourceTree = "<group>"; };
+		6860524D2C29B2D600D60EA0 /* PosterImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageData.swift; sourceTree = "<group>"; };
 		68F161CE2C16D5650059FA66 /* YegrCinemaEX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YegrCinemaEX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F161D12C16D5650059FA66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68F161D32C16D5650059FA66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +100,7 @@
 		686052322C29776900D60EA0 /* RelatedMoviesVC */ = {
 			isa = PBXGroup;
 			children = (
+				6860524C2C29B2C400D60EA0 /* Model */,
 				6860523D2C29953A00D60EA0 /* SimilarCell */,
 				6860523E2C29954A00D60EA0 /* RecommendCell */,
 				6860523F2C29955700D60EA0 /* PosterCell */,
@@ -110,6 +121,7 @@
 		6860523E2C29954A00D60EA0 /* RecommendCell */ = {
 			isa = PBXGroup;
 			children = (
+				686052412C29961A00D60EA0 /* RecommendCollectionViewCell.swift */,
 				686052372C29824D00D60EA0 /* RecommendTableViewCell.swift */,
 			);
 			path = RecommendCell;
@@ -118,9 +130,20 @@
 		6860523F2C29955700D60EA0 /* PosterCell */ = {
 			isa = PBXGroup;
 			children = (
+				686052432C2996DE00D60EA0 /* PosterCollectionViewCell.swift */,
 				686052392C29825F00D60EA0 /* PosterTableViewCell.swift */,
 			);
 			path = PosterCell;
+			sourceTree = "<group>";
+		};
+		6860524C2C29B2C400D60EA0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				686052452C299CCE00D60EA0 /* SimilarData.swift */,
+				6860524A2C29B07100D60EA0 /* RecommendData.swift */,
+				6860524D2C29B2D600D60EA0 /* PosterImageData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		68F161C52C16D5650059FA66 = {
@@ -287,15 +310,20 @@
 				68F161EE2C16D8B30059FA66 /* ReusableProtocol+.swift in Sources */,
 				68F161E82C16D81D0059FA66 /* APIKey.swift in Sources */,
 				68F1620E2C18172D0059FA66 /* DetailCastTableViewCell.swift in Sources */,
+				686052462C299CCE00D60EA0 /* SimilarData.swift in Sources */,
+				686052422C29961A00D60EA0 /* RecommendCollectionViewCell.swift in Sources */,
 				68F161FF2C1769AA0059FA66 /* DateFormatter+.swift in Sources */,
 				686052362C297B3F00D60EA0 /* SimilarTableViewCell.swift in Sources */,
 				686052382C29824D00D60EA0 /* RecommendTableViewCell.swift in Sources */,
+				686052442C2996DE00D60EA0 /* PosterCollectionViewCell.swift in Sources */,
 				68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */,
 				68F162032C17DBEF0059FA66 /* DetailViewController.swift in Sources */,
 				6860523A2C29825F00D60EA0 /* PosterTableViewCell.swift in Sources */,
 				6860523C2C298F9B00D60EA0 /* SimilarCollectionViewCell.swift in Sources */,
 				68F161FB2C16F1010059FA66 /* MainTableViewCell.swift in Sources */,
 				68F162172C1867C20059FA66 /* SearchCollectionViewController.swift in Sources */,
+				6860524E2C29B2D600D60EA0 /* PosterImageData.swift in Sources */,
+				6860524B2C29B07100D60EA0 /* RecommendData.swift in Sources */,
 				68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */,
 				68F162192C189D880059FA66 /* SearchCollectionViewCell.swift in Sources */,
 				68F1621B2C18A47C0059FA66 /* SearchData.swift in Sources */,

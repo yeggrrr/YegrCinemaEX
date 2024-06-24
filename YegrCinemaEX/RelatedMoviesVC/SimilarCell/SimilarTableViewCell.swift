@@ -10,22 +10,42 @@ import SnapKit
 
 class SimilarTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
-    let similarCollecionView = UICollectionView(frame: .zero, collectionViewLayout: collecionViewLayout())
+    let similarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    
+    var similarResults: [SimilarData.Results] = []
+    
+    var cellType: CellType = .none
+    
+    enum CellType {
+        case exist
+        case none
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureUI()
-        configureCollecionView()
+        configureCollectionView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configureData(similarResults: [SimilarData.Results]) {
+        if similarResults.isEmpty {
+            self.cellType = .none
+        } else {
+            self.similarResults = similarResults
+            self.cellType = .exist
+        }
+        
+        similarCollectionView.reloadData()
+    }
+    
     func configureUI() {
         contentView.addSubview(titleLabel)
-        contentView.addSubview(similarCollecionView)
+        contentView.addSubview(similarCollectionView)
         
         let safeArea = contentView.safeAreaLayoutGuide
         titleLabel.snp.makeConstraints {
@@ -33,7 +53,7 @@ class SimilarTableViewCell: UITableViewCell {
             $0.height.equalTo(20)
         }
         
-        similarCollecionView.snp.makeConstraints {
+        similarCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(5)
             $0.leading.trailing.equalTo(safeArea).inset(5)
             $0.bottom.equalTo(safeArea).offset(-5)
@@ -44,16 +64,16 @@ class SimilarTableViewCell: UITableViewCell {
         titleLabel.textAlignment = .left
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         
-        similarCollecionView.backgroundColor = .darkGray
+        similarCollectionView.backgroundColor = .white
     }
     
-    func configureCollecionView() {
-        similarCollecionView.dataSource = self
-        similarCollecionView.delegate = self
-        similarCollecionView.register(SimilarCollectionViewCell.self, forCellWithReuseIdentifier: SimilarCollectionViewCell.id)
+    func configureCollectionView() {
+        similarCollectionView.dataSource = self
+        similarCollectionView.delegate = self
+        similarCollectionView.register(SimilarCollectionViewCell.self, forCellWithReuseIdentifier: SimilarCollectionViewCell.id)
     }
     
-    static func collecionViewLayout() -> UICollectionViewLayout {
+    static func collectionViewLayout() -> UICollectionViewLayout {
         let layout  = UICollectionViewFlowLayout()
         let sectionSpacing: CGFloat = 5
         let cellSpacing: CGFloat = 5
@@ -69,12 +89,27 @@ class SimilarTableViewCell: UITableViewCell {
 
 extension SimilarTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        switch cellType {
+        case .exist:
+            return similarResults.count
+        case .none:
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimilarCollectionViewCell.id, for: indexPath) as? SimilarCollectionViewCell else { return UICollectionViewCell() }
-        cell.backgroundColor = .lightGray
+        cell.clipsToBounds = true
+        
+        switch cellType {
+        case .exist:
+            guard let posterPath = similarResults[indexPath.row].posterPath else { return UICollectionViewCell() }
+            let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")
+            cell.posterImageView.kf.setImage(with: url)
+        case .none:
+            cell.posterImageView.image = UIImage(named: "no_recommend")
+        }
+        
         return cell
     }
 }

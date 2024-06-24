@@ -1,5 +1,5 @@
 //
-//  SimilarCollectionViewCell.swift
+//  PosterCollectionViewCell.swift
 //  YegrCinemaEX
 //
 //  Created by YJ on 6/24/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SimilarCollectionViewCell: UICollectionViewCell {
+class PosterCollectionViewCell: UICollectionViewCell {
     let posterImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -30,6 +30,7 @@ class SimilarCollectionViewCell: UICollectionViewCell {
             $0.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
         }
         
+        posterImageView.contentMode = .scaleToFill
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = 10
     }
