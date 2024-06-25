@@ -68,7 +68,7 @@ class APICall {
     }
     
     func getSimilarData(id: Int, completion: @escaping (SimilarData) -> Void) {
-        let url = APIURL.similarURL + "\(id)/similar"
+        let url = APIURL.contentsURL + "\(id)/similar"
         guard let similarURL = URL(string: url) else { return }
         
         let header: HTTPHeaders = [
@@ -91,7 +91,7 @@ class APICall {
     }
     
     func getRecommendData(id: Int, completion: @escaping (RecommendData) -> Void) {
-        let url = APIURL.recommendURL + "\(id)/recommendations"
+        let url = APIURL.contentsURL + "\(id)/recommendations"
         guard let similarURL = URL(string: url) else { return }
         
         let header: HTTPHeaders = [
@@ -114,7 +114,7 @@ class APICall {
     }
     
     func getPosterData(id: Int, completion: @escaping (PosterImageData) -> Void) {
-        let url = APIURL.posterURL + "\(id)/images"
+        let url = APIURL.contentsURL + "\(id)/images"
         guard let similarURL = URL(string: url) else { return }
         
         let header: HTTPHeaders = [
@@ -130,6 +130,52 @@ class APICall {
             switch response.result {
             case .success(let value):
                 completion(value)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func getSimilar(id: Int, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void) {
+        let url = APIURL.contentsURL + "\(id)/similar"
+        guard let similarURL = URL(string: url) else { return }
+        
+        let header: HTTPHeaders = [
+            "Authorization": APIKey.authorization,
+            "accept": APIKey.accept
+        ]
+        
+        let params: Parameters  =  [
+            "api_key": APIKey.apiKey
+        ]
+        
+        AF.request(similarURL, method: .get, parameters: params, headers: header).responseDecodable(of: ContentsImageData.self) { response in
+            switch response.result {
+            case .success(let value):
+                completion(value.results)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func getRecommend(id: Int, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void) {
+        let url = APIURL.contentsURL + "\(id)/recommendations"
+        guard let similarURL = URL(string: url) else { return }
+        
+        let header: HTTPHeaders = [
+            "Authorization": APIKey.authorization,
+            "accept": APIKey.accept
+        ]
+        
+        let params: Parameters  =  [
+            "api_key": APIKey.apiKey
+        ]
+        
+        AF.request(similarURL, method: .get, parameters: params, headers: header).responseDecodable(of: ContentsImageData.self) { response in
+            switch response.result {
+            case .success(let value):
+                completion(value.results)
             case .failure(let error):
                 print(error)
             }

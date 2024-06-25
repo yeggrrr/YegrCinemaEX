@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SnapKit
+import Kingfisher
 
 class RelatedContentsViewController: UIViewController {
     
@@ -15,13 +17,21 @@ class RelatedContentsViewController: UIViewController {
     var movieTitle: String?
     var id: Int?
     
+    var contentsImageList: [[ContentsImageData.ContentsResults]] = [
+        [ContentsImageData.ContentsResults(posterPath: "")],
+        [ContentsImageData.ContentsResults(posterPath: "")]
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigation()
         configureTableView()
         configureUI()
-        getData()
+        
+        if let id = id {
+            getData(id: id)
+        }
     }
     
     func configureNavigation() {
@@ -68,8 +78,28 @@ class RelatedContentsViewController: UIViewController {
         relatedcontentsTableView.backgroundColor = .lightGray
     }
     
-    func getData() {
+    func getData(id: Int) {
+        let group = DispatchGroup()
         
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            APICall.shared.getSimilar(id: id) { results in
+                self.contentsImageList[0] = results
+                group.leave()
+            }
+        }
+        
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            APICall.shared.getRecommend(id: id) { results in
+                self.contentsImageList[1] = results
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.relatedcontentsTableView.reloadData()
+        }
     }
     
     @objc func moreInfoButtonClicked() {
@@ -83,7 +113,7 @@ extension RelatedContentsViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return contentsImageList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,18 +124,25 @@ extension RelatedContentsViewController: UITableViewDelegate, UITableViewDataSou
         cell.posterCollectionView.dataSource = self
         cell.posterCollectionView.register(RelatedContentsCollectionViewCell.self, forCellWithReuseIdentifier: RelatedContentsCollectionViewCell.id)
         
+        cell.posterCollectionView.tag = indexPath.row
+        cell.posterCollectionView.reloadData()
         return cell
     }
 }
 
 extension RelatedContentsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return contentsImageList[collectionView.tag].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RelatedContentsCollectionViewCell.id, for: indexPath) as? RelatedContentsCollectionViewCell else { return UICollectionViewCell() }
+        
+        if let imageData = contentsImageList[collectionView.tag][indexPath.item].posterPath {
+            let posterURL = URL(string: "https://image.tmdb.org/t/p/w500\(imageData)")
+            cell.posterImageView.kf.setImage(with: posterURL)
+        }
+        
         return cell
-                
     }
 }
