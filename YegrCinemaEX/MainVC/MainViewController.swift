@@ -111,11 +111,17 @@ class MainViewController: UIViewController {
     }
     
     @objc func clipButtonClicked(_ sender: UIButton) {
+        // let item = resultList[sender.tag]
+        // let relatedMoviesVC = RelatedMoviesViewController()
+        // relatedMoviesVC.movieTitle = item.title
+        // relatedMoviesVC.id = item.id
+        // navigationController?.pushViewController(relatedMoviesVC, animated: true)
+        
         let item = resultList[sender.tag]
-        let relatedMoviesVC = RelatedMoviesViewController()
-        relatedMoviesVC.movieTitle = item.title
-        relatedMoviesVC.id = item.id
-        navigationController?.pushViewController(relatedMoviesVC, animated: true)
+        let relatedVC = RelatedContentsViewController()
+        relatedVC.movieTitle = item.title
+        relatedVC.id = item.id
+        navigationController?.pushViewController(relatedVC, animated: true)
     }
 }
 
