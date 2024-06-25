@@ -181,4 +181,27 @@ class APICall {
             }
         }
     }
+    
+    func getPosterImage(id: Int, completion: @escaping ([MoviePosterData.Backdrops]) -> Void) {
+        let url = APIURL.contentsURL + "\(id)/images"
+        guard let similarURL = URL(string: url) else { return }
+        
+        let header: HTTPHeaders = [
+            "Authorization": APIKey.authorization,
+            "accept": APIKey.accept
+        ]
+        
+        let params: Parameters  =  [
+            "api_key": APIKey.apiKey
+        ]
+        
+        AF.request(similarURL, method: .get, parameters: params, headers: header).responseDecodable(of: MoviePosterData.self) { response in
+            switch response.result {
+            case .success(let value):
+                completion(value.backdrops)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }

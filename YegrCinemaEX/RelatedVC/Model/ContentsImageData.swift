@@ -24,3 +24,15 @@ struct ContentsImageData: Codable {
         }
     }
 }
+
+struct MoviePosterData: Codable {
+    let backdrops: [Backdrops]
+    
+    struct Backdrops: Codable {
+        let filePath: String
+        
+        enum CodingKeys: String, CodingKey {
+            case filePath = "file_path"
+        }
+    }
+}
