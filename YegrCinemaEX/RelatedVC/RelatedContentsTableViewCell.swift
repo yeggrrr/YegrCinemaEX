@@ -52,8 +52,11 @@ class RelatedContentsTableViewCell: UITableViewCell {
         }
     }
     
+    func configureTitle(title: String) {
+        titleLabel.text = title
+    }
+    
     func configureView() {
-        titleLabel.text = "비슷한 영화"
         titleLabel.textColor = .label
         titleLabel.textAlignment = .left
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
@@ -73,7 +76,7 @@ class RelatedContentsTableViewCell: UITableViewCell {
     
     static func posterCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150, height: 220)
+        layout.itemSize = CGSize(width: 150, height: 240)
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

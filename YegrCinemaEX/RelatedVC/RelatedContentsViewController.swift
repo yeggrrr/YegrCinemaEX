@@ -19,6 +19,14 @@ class RelatedContentsViewController: UIViewController {
     var contentsImageList: [[ContentsImageData.ContentsResults]] = []
     var posterImageList: [MoviePosterData.Backdrops] = []
     
+    enum CellType: String {
+        case similar = "비슷한 영화"
+        case recommend = "추천 영화"
+        case poster = "포스터"
+    }
+    
+    let cellTypeList: [CellType] = [.similar, .recommend, .poster]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,10 +122,10 @@ class RelatedContentsViewController: UIViewController {
 
 extension RelatedContentsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0, 1:
+        switch cellTypeList[indexPath.row] {
+        case .similar, .recommend:
             return 220
-        default:
+        case .poster:
             return 280
         }
     }
@@ -133,15 +141,15 @@ extension RelatedContentsViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RelatedContentsTableViewCell.id, for: indexPath) as?
                 RelatedContentsTableViewCell else { return UITableViewCell() }
-        switch indexPath.row {
-        case 0, 1:
+        switch cellTypeList[indexPath.row] {
+        case .similar, .recommend:
             cell.posterCollectionView.isHidden = true
             cell.contentsCollectionView.delegate = self
             cell.contentsCollectionView.dataSource = self
             cell.contentsCollectionView.register(RelatedContentsCollectionViewCell.self, forCellWithReuseIdentifier: RelatedContentsCollectionViewCell.id)
             cell.contentsCollectionView.tag = indexPath.row
             cell.contentsCollectionView.reloadData()
-        default:
+        case .poster:
             cell.contentsCollectionView.isHidden = true
             cell.posterCollectionView.delegate = self
             cell.posterCollectionView.dataSource = self
@@ -150,36 +158,33 @@ extension RelatedContentsViewController: UITableViewDelegate, UITableViewDataSou
             cell.posterCollectionView.reloadData()
         }
         
+        cell.configureTitle(title: cellTypeList[indexPath.row].rawValue)
         return cell
     }
 }
 
 extension RelatedContentsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView.tag {
-        case 0, 1:
+        switch cellTypeList[collectionView.tag] {
+        case .similar, .recommend:
             return contentsImageList[collectionView.tag].count
-        case 2:
+        case .poster:
             return posterImageList.count
-        default:
-            return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RelatedContentsCollectionViewCell.id, for: indexPath) as? RelatedContentsCollectionViewCell else { return UICollectionViewCell() }
-        switch collectionView.tag {
-        case 0, 1:
+        switch cellTypeList[collectionView.tag] {
+        case .similar, .recommend:
             if let imageData = contentsImageList[collectionView.tag][indexPath.item].posterPath {
                 let posterURL = URL(string: "https://image.tmdb.org/t/p/w500\(imageData)")
                 cell.posterImageView.kf.setImage(with: posterURL)
             }
-        case 2:
+        case .poster:
             let imageData = posterImageList[indexPath.item].filePath
             let posterURL = URL(string: "https://image.tmdb.org/t/p/w500\(imageData)")
             cell.posterImageView.kf.setImage(with: posterURL)
-        default:
-            break
         }
         
         return cell
