@@ -9,6 +9,12 @@ import UIKit
 import SnapKit
 import Kingfisher
 
+enum CellType: String {
+    case similar = "비슷한 영화"
+    case recommend = "추천 영화"
+    case poster = "포스터"
+}
+
 class RelatedContentsViewController: UIViewController {
     let movieTitleLabel = UILabel()
     let relatedcontentsTableView = UITableView()
@@ -18,12 +24,6 @@ class RelatedContentsViewController: UIViewController {
     
     var contentsImageList: [[ContentsImageData.ContentsResults]] = []
     var posterImageList: [MoviePosterData.Backdrops] = []
-    
-    enum CellType: String {
-        case similar = "비슷한 영화"
-        case recommend = "추천 영화"
-        case poster = "포스터"
-    }
     
     let cellTypeList: [CellType] = [.similar, .recommend, .poster]
     
@@ -141,24 +141,19 @@ extension RelatedContentsViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RelatedContentsTableViewCell.id, for: indexPath) as?
                 RelatedContentsTableViewCell else { return UITableViewCell() }
-        switch cellTypeList[indexPath.row] {
+        let cellType = cellTypeList[indexPath.row]
+        switch cellType {
         case .similar, .recommend:
-            cell.posterCollectionView.isHidden = true
-            cell.contentsCollectionView.delegate = self
-            cell.contentsCollectionView.dataSource = self
-            cell.contentsCollectionView.register(RelatedContentsCollectionViewCell.self, forCellWithReuseIdentifier: RelatedContentsCollectionViewCell.id)
-            cell.contentsCollectionView.tag = indexPath.row
-            cell.contentsCollectionView.reloadData()
+            cell.contentsView.collectionView.delegate = self
+            cell.contentsView.collectionView.dataSource = self
+            cell.contentsView.collectionView.tag = indexPath.row
         case .poster:
-            cell.contentsCollectionView.isHidden = true
-            cell.posterCollectionView.delegate = self
-            cell.posterCollectionView.dataSource = self
-            cell.posterCollectionView.register(RelatedContentsCollectionViewCell.self, forCellWithReuseIdentifier: RelatedContentsCollectionViewCell.id)
-            cell.posterCollectionView.tag = indexPath.row
-            cell.posterCollectionView.reloadData()
+            cell.postersView.collectionView.delegate = self
+            cell.postersView.collectionView.dataSource = self
+            cell.postersView.collectionView.tag = indexPath.row
         }
-        
-        cell.configureTitle(title: cellTypeList[indexPath.row].rawValue)
+        cell.configureCollectionView(cellType: cellType)
+        cell.configureTitle(title: cellType.rawValue)
         return cell
     }
 }
