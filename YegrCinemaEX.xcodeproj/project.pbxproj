@@ -22,6 +22,7 @@
 		6860528A2C2B235A00D60EA0 /* ContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052892C2B235A00D60EA0 /* ContentsView.swift */; };
 		6860528C2C2B236B00D60EA0 /* PostersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6860528B2C2B236B00D60EA0 /* PostersView.swift */; };
 		686052922C2C002F00D60EA0 /* TMDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052912C2C002F00D60EA0 /* TMDBRequest.swift */; };
+		686052942C2C235A00D60EA0 /* ShowAlert+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052932C2C235A00D60EA0 /* ShowAlert+.swift */; };
 		68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D12C16D5650059FA66 /* AppDelegate.swift */; };
 		68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D32C16D5650059FA66 /* SceneDelegate.swift */; };
 		68F161D62C16D5650059FA66 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D52C16D5650059FA66 /* MainViewController.swift */; };
@@ -61,6 +62,7 @@
 		686052892C2B235A00D60EA0 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
 		6860528B2C2B236B00D60EA0 /* PostersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostersView.swift; sourceTree = "<group>"; };
 		686052912C2C002F00D60EA0 /* TMDBRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBRequest.swift; sourceTree = "<group>"; };
+		686052932C2C235A00D60EA0 /* ShowAlert+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowAlert+.swift"; sourceTree = "<group>"; };
 		68F161CE2C16D5650059FA66 /* YegrCinemaEX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YegrCinemaEX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F161D12C16D5650059FA66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68F161D32C16D5650059FA66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				68F161ED2C16D8B30059FA66 /* ReusableProtocol+.swift */,
 				68F161FE2C1769AA0059FA66 /* DateFormatter+.swift */,
 				68F162002C17DA2B0059FA66 /* UILabel+.swift */,
+				686052932C2C235A00D60EA0 /* ShowAlert+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				686052382C29824D00D60EA0 /* RecommendTableViewCell.swift in Sources */,
 				686052442C2996DE00D60EA0 /* PosterCollectionViewCell.swift in Sources */,
 				68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */,
+				686052942C2C235A00D60EA0 /* ShowAlert+.swift in Sources */,
 				68F162032C17DBEF0059FA66 /* DetailViewController.swift in Sources */,
 				6860523A2C29825F00D60EA0 /* PosterTableViewCell.swift in Sources */,
 				6860523C2C298F9B00D60EA0 /* SimilarCollectionViewCell.swift in Sources */,
