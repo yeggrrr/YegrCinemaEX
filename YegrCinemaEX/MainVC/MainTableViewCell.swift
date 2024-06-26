@@ -46,7 +46,6 @@ class MainTableViewCell: UITableViewCell {
         contentView.addSubview(mainView)
         mainView.addSubview(posterImageView)
         contentView.addSubview(clipButton)
-        // posterImageView.addSubview(clipButton)
         
         mainView.addSubview(mainTitleView)
         

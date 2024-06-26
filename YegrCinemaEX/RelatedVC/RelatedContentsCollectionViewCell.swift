@@ -27,6 +27,7 @@ class RelatedContentsCollectionViewCell: UICollectionViewCell {
             $0.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
         
-        posterImageView.backgroundColor = .darkGray
+        posterImageView.layer.cornerRadius = 10
+        posterImageView.layer.masksToBounds = true
     }
 }
