@@ -24,7 +24,6 @@ class RelatedMoviesViewController: UIViewController {
     
     var similarDataList: [ContentsImageData.ContentsResults] = [] {
         didSet {
-            print(similarDataList)
             relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.similar.rawValue, section: 0)], with: .automatic)
         }
     }
