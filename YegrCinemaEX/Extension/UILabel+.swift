@@ -16,7 +16,7 @@ extension UILabel {
     
     func detailUI(txt: String, txtAlignment: NSTextAlignment, fontStyle: UIFont) {
         text = txt
-        textColor = .label
+        textColor = .white
         textAlignment = txtAlignment
         font = fontStyle
         numberOfLines = 0

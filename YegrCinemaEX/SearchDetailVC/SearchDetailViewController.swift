@@ -12,6 +12,8 @@ import Kingfisher
 class SearchDetailViewController: UIViewController {
     let titleLabel = UILabel()
     let posterImageView = UIImageView()
+    let overviewScrollView = UIScrollView()
+    let overviewBackgroundView = UIView()
     let overviewLabel = UILabel()
     
     var searchList: SearchMovie.Results?
@@ -27,7 +29,9 @@ class SearchDetailViewController: UIViewController {
     func configureHierarchy() {
         view.addSubview(titleLabel)
         view.addSubview(posterImageView)
-        view.addSubview(overviewLabel)
+        view.addSubview(overviewScrollView)
+        overviewScrollView.addSubview(overviewBackgroundView)
+        overviewBackgroundView.addSubview(overviewLabel)
     }
     
     func configureLayout() {
@@ -44,24 +48,37 @@ class SearchDetailViewController: UIViewController {
             $0.height.equalTo(400)
         }
         
-        overviewLabel.snp.makeConstraints {
+        overviewScrollView.snp.makeConstraints {
             $0.top.equalTo(posterImageView.snp.bottom).offset(20)
-            $0.horizontalEdges.equalTo(safeArea).inset(35)
-            $0.bottom.lessThanOrEqualTo(safeArea).offset(-20)
+            $0.horizontalEdges.equalTo(safeArea).inset(30)
+            $0.bottom.equalTo(safeArea).offset(-20)
+        }
+        
+        let scrollViewFrame = overviewScrollView.frameLayoutGuide
+        let scrollViewContent = overviewScrollView.contentLayoutGuide
+        
+        overviewBackgroundView.snp.makeConstraints {
+            $0.verticalEdges.equalTo(scrollViewContent.snp.verticalEdges)
+            $0.horizontalEdges.equalTo(scrollViewFrame.snp.horizontalEdges)
+        }
+        
+        overviewLabel.snp.makeConstraints {
+            $0.verticalEdges.equalTo(overviewBackgroundView.snp.verticalEdges)
+            $0.horizontalEdges.equalTo(overviewBackgroundView.snp.horizontalEdges)
         }
     }
     
     func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .darkGray
         
         guard let title = searchList?.title else { return }
         guard let overview = searchList?.overview else { return }
         guard let posterImage = searchList?.posterPath else { return }
         let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
         
-        titleLabel.detailUI(txt: title, txtAlignment: .center, fontStyle: .systemFont(ofSize: 20, weight: .bold))
-        overviewLabel.detailUI(txt: overview, txtAlignment: .left, fontStyle: .systemFont(ofSize: 15, weight: .regular))
-        posterImageView.setUI(borderColor: UIColor.darkGray.cgColor)
+        titleLabel.detailUI(txt: title, txtAlignment: .center, fontStyle: .systemFont(ofSize: 22, weight: .bold))
+        overviewLabel.detailUI(txt: overview, txtAlignment: .left, fontStyle: .systemFont(ofSize: 16, weight: .regular))
+        posterImageView.setUI(borderColor: UIColor.lightGray.cgColor)
         posterImageView.kf.setImage(with: imageURL)
     }
 }
