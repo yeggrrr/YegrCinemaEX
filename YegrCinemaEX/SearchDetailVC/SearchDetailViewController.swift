@@ -7,11 +7,14 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class SearchDetailViewController: UIViewController {
     let titleLabel = UILabel()
     let posterImageView = UIImageView()
     let overviewLabel = UILabel()
+    
+    var searchList: SearchMovie.Results?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,7 @@ class SearchDetailViewController: UIViewController {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeArea).offset(30)
             $0.horizontalEdges.equalTo(safeArea).inset(20)
-            $0.height.equalTo(30)
+            $0.height.greaterThanOrEqualTo(20)
         }
         
         posterImageView.snp.makeConstraints {
@@ -44,26 +47,21 @@ class SearchDetailViewController: UIViewController {
         overviewLabel.snp.makeConstraints {
             $0.top.equalTo(posterImageView.snp.bottom).offset(20)
             $0.horizontalEdges.equalTo(safeArea).inset(35)
-            $0.bottom.greaterThanOrEqualTo(safeArea).offset(-30)
+            $0.bottom.lessThanOrEqualTo(safeArea).offset(-20)
         }
     }
     
     func configureUI() {
         view.backgroundColor = .white
         
-        titleLabel.text = "영화제목"
-        titleLabel.textColor = .label
-        titleLabel.textAlignment = .center
-        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        guard let title = searchList?.title else { return }
+        guard let overview = searchList?.overview else { return }
+        guard let posterImage = searchList?.posterPath else { return }
+        let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
         
-        posterImageView.backgroundColor = .systemGray5
-        posterImageView.layer.cornerRadius = 10
-        posterImageView.layer.borderWidth = 3
-        posterImageView.layer.borderColor = UIColor.darkGray.cgColor
-        
-        overviewLabel.text = "fssfaskjhfdskfhakhdjfhakhfdjhak"
-        overviewLabel.textColor = .label
-        overviewLabel.textAlignment = .left
-        overviewLabel.font = .systemFont(ofSize: 17, weight: .regular)
+        titleLabel.detailUI(txt: title, txtAlignment: .center, fontStyle: .systemFont(ofSize: 20, weight: .bold))
+        overviewLabel.detailUI(txt: overview, txtAlignment: .left, fontStyle: .systemFont(ofSize: 15, weight: .regular))
+        posterImageView.setUI(borderColor: UIColor.darkGray.cgColor)
+        posterImageView.kf.setImage(with: imageURL)
     }
 }

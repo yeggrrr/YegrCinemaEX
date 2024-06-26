@@ -124,8 +124,8 @@ extension SearchCollectionViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(movieList[indexPath.row])
         let searchDetailVC = SearchDetailViewController()
+        searchDetailVC.searchList = movieList[indexPath.item]
         present(searchDetailVC, animated: true)
     }
 }
