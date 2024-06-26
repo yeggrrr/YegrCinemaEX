@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
             let idList = resultList.map { $0.id }
             
             for id in idList {
-                APICall.shared.getCreditsData(id: id) { creditData in
+                APICall.shared.getCreditsData(api: .credits(id: id)) { creditData in
                     self.castData.append(creditData.cast)
                 }
             }
@@ -72,13 +72,14 @@ class MainViewController: UIViewController {
     }
     
     func getGenreData() {
-        APICall.shared.getGenreData { genreData in
+        APICall.shared.getGenreData(api: .genre) { genreData in
             self.genreList = genreData.genres
         }
     }
     
     func getMovieData() {
-        APICall.shared.getMovieData { movieData in
+
+        APICall.shared.getMovieData(api: .movies) { movieData in
             self.resultList = movieData.results
         }
     }

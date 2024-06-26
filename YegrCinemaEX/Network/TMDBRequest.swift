@@ -9,6 +9,9 @@ import Foundation
 import Alamofire
 
 enum TMDBRequest {
+    case genre
+    case movies
+    case credits(id: Int)
     case similar(id: Int)
     case recommend(id: Int)
     case poster(id: Int)
@@ -19,6 +22,12 @@ enum TMDBRequest {
     
     var endpoint: URL {
         switch self {
+        case .genre:
+            return URL(string: baseURL + "genre/movie/list")!
+        case .movies:
+            return URL(string: baseURL + "trending/movie/week")!
+        case .credits(let id):
+            return URL(string: baseURL + "movie/\(id)/credits")!
         case .similar(let id):
             return URL(string: baseURL + "movie/\(id)/similar")!
         case .recommend(let id):
