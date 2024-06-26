@@ -12,7 +12,7 @@ class RecommendTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
     let recommendCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
-    var recommendResults: [RecommendData.RecommendResults] = []
+    var recommendResults: [ContentsImageData.ContentsResults] = []
     
     var cellType: CellType = .none
     
@@ -32,7 +32,7 @@ class RecommendTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureData(recommendResults: [RecommendData.RecommendResults]) {
+    func configureData(recommendResults: [ContentsImageData.ContentsResults]) {
         if recommendResults.isEmpty {
             self.cellType = .none
         } else {

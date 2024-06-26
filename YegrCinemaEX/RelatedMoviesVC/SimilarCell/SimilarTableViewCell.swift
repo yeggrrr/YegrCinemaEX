@@ -12,7 +12,7 @@ class SimilarTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
     let similarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
-    var similarResults: [SimilarData.Results] = []
+    var similarResults: [ContentsImageData.ContentsResults] = []
     
     var cellType: CellType = .none
     
@@ -32,7 +32,7 @@ class SimilarTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureData(similarResults: [SimilarData.Results]) {
+    func configureData(similarResults: [ContentsImageData.ContentsResults]) {
         if similarResults.isEmpty {
             self.cellType = .none
         } else {

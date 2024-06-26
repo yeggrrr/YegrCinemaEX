@@ -12,7 +12,7 @@ class PosterTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
     let posterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
-    var posterResults: [PosterImageData.Backdrops] = []
+    var posterResults: [MoviePosterData.Backdrops] = []
     
     var cellType: CellType = .none
     
@@ -32,7 +32,7 @@ class PosterTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureData(posterResults: [PosterImageData.Backdrops]) {
+    func configureData(posterResults: [MoviePosterData.Backdrops]) {
         if posterResults.isEmpty {
             self.cellType = .none
         } else {

@@ -21,17 +21,19 @@ class RelatedMoviesViewController: UIViewController {
     
     var movieTitle: String?
     var id: Int?
-    var similarDataList: SimilarData? {
+    
+    var similarDataList: [ContentsImageData.ContentsResults] = [] {
         didSet {
+            print(similarDataList)
             relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.similar.rawValue, section: 0)], with: .automatic)
         }
     }
-    var recommendDataList: RecommendData? {
+    var recommendDataList: [ContentsImageData.ContentsResults] = [] {
         didSet {
             relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.recommend.rawValue, section: 0)], with: .automatic)
         }
     }
-    var posterDataList: PosterImageData? {
+    var posterDataList: [MoviePosterData.Backdrops] = [] {
         didSet {
             relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.poster.rawValue, section: 0)], with: .automatic)
         }
@@ -50,15 +52,15 @@ class RelatedMoviesViewController: UIViewController {
     }
     
     func getData(id: Int) {
-        APICall.shared.getSimilarData(id: id) { similarData in
+        APICall.shared.getSimilar(api: .similar(id: id)) { similarData in
             self.similarDataList = similarData
         }
         
-        APICall.shared.getRecommendData(id: id) { recommendData in
+        APICall.shared.getRecommend(api: .recommend(id: id)) { recommendData in
             self.recommendDataList = recommendData
         }
         
-        APICall.shared.getPosterData(id: id) { posterData in
+        APICall.shared.getPosterImage(api: .poster(id: id)) { posterData in
             self.posterDataList = posterData
         }
     }
@@ -130,25 +132,19 @@ extension RelatedMoviesViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch cellTypeList[indexPath.row] {
         case .similar:
-            guard let similarDataList = similarDataList else { return UITableViewCell() }
-            
             let similarCell = SimilarTableViewCell()
             similarCell.selectionStyle = .none
-            similarCell.configureData(similarResults: similarDataList.results)
+            similarCell.configureData(similarResults: similarDataList)
             return similarCell
         case .recommend:
-            guard let recommendDataList = recommendDataList else { return UITableViewCell() }
-            
             let recommendCell = RecommendTableViewCell()
             recommendCell.selectionStyle = .none
-            recommendCell.configureData(recommendResults: recommendDataList.results)
+            recommendCell.configureData(recommendResults: recommendDataList)
             return recommendCell
         case .poster:
-            guard let posterDataList = posterDataList else { return UITableViewCell() }
-            
             let posterCell = PosterTableViewCell()
             posterCell.selectionStyle = .none
-            posterCell.configureData(posterResults: posterDataList.backdrops)
+            posterCell.configureData(posterResults: posterDataList)
             posterCell.posterCollectionView.reloadData()
             return posterCell
         }
