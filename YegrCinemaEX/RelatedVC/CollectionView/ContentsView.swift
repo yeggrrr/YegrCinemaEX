@@ -28,15 +28,15 @@ class ContentsView: UIView {
         }
     }
     
-     static func contentsCollectionViewLayout() -> UICollectionViewLayout {
-         let layout = UICollectionViewFlowLayout()
-         layout.itemSize = CGSize(width: 120, height: 180)
-         layout.minimumLineSpacing = 5
-         layout.minimumInteritemSpacing = 0
-         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-         layout.scrollDirection = .horizontal
-         return layout
-     }
+    static func contentsCollectionViewLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 120, height: 180)
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.scrollDirection = .horizontal
+        return layout
+    }
 }
 
 
