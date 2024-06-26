@@ -70,29 +70,6 @@ class SearchCollectionViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         return layout
     }
-    
-    func getMovieData(query: String, page: Int, completion: @escaping ([SearchMovie.Results]) -> Void) {
-        let url = APIURL.searchMovieURL
-        let header: HTTPHeaders = [
-            "Authorization": APIKey.authorization
-        ]
-        
-        let param: Parameters = [
-            "query": query,
-            "language": "ko-KR",
-            "page": page
-        ]
-        
-        AF.request(url, method: .get, parameters: param, headers: header).responseDecodable(of: SearchMovie.self) { response in
-            switch response.result {
-            case .success(let value):
-                completion(value.results)
-                self.lastPage = value.totalPages
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
 }
 
 extension SearchCollectionViewController: UISearchBarDelegate {
@@ -101,11 +78,12 @@ extension SearchCollectionViewController: UISearchBarDelegate {
         page = 1
         movieList.removeAll()
         guard let text = searchBar.text else { return }
-        getMovieData(query: text, page: 1) { results in
+        APICall.shared.getSearchData(api: .search(query: text, page: 1)) { searchData in
+            self.lastPage = searchData.totalPages
             if self.page == 1 {
-                self.movieList = results
+                self.movieList = searchData.results
             } else {
-                self.movieList.append(contentsOf: results)
+                self.movieList.append(contentsOf: searchData.results)
             }
         }
     }
@@ -138,8 +116,8 @@ extension SearchCollectionViewController: UICollectionViewDataSourcePrefetching 
                 if 20 * (page - 1) < indexPath.item {
                     page += 1
                     guard let text = searchBar.text else { return }
-                    getMovieData(query: text, page: page) { results in
-                        self.movieList.append(contentsOf: results)
+                    APICall.shared.getSearchData(api: .search(query: text, page: page)) { movieData in
+                        self.movieList.append(contentsOf: movieData.results)
                     }
                 }
             }

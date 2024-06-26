@@ -43,6 +43,17 @@ class APICall {
             }
         }
     }
+
+    func getSearchData(api: TMDBRequest, completion: @escaping (SearchMovie) -> Void) {
+        AF.request(api.endpoint, method: api.method, headers: api.header).responseDecodable(of: SearchMovie.self) { response in
+            switch response.result {
+            case .success(let value):
+                completion(value)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     func getSimilar(api: TMDBRequest, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void, errorHandler: @escaping (String) -> Void) {
         AF.request(api.endpoint, method: api.method, parameters: api.parameter, headers: api.header).responseDecodable(of: ContentsImageData.self) { response in

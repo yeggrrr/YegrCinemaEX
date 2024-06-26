@@ -12,6 +12,7 @@ enum TMDBRequest {
     case genre
     case movies
     case credits(id: Int)
+    case search(query: String, page: Int)
     case similar(id: Int)
     case recommend(id: Int)
     case poster(id: Int)
@@ -28,6 +29,8 @@ enum TMDBRequest {
             return URL(string: baseURL + "trending/movie/week")!
         case .credits(let id):
             return URL(string: baseURL + "movie/\(id)/credits")!
+        case .search(query: let query, page: let page):
+            return URL(string: baseURL + "search/movie?query=\(query)&language=ko-KR&page=\(page)")!
         case .similar(let id):
             return URL(string: baseURL + "movie/\(id)/similar")!
         case .recommend(let id):
