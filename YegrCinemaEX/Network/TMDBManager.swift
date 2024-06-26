@@ -44,34 +44,37 @@ class APICall {
         }
     }
     
-    func getSimilar(api: TMDBRequest, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void) {
+    func getSimilar(api: TMDBRequest, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void, errorHandler: @escaping (String) -> Void) {
         AF.request(api.endpoint, method: api.method, parameters: api.parameter, headers: api.header).responseDecodable(of: ContentsImageData.self) { response in
             switch response.result {
             case .success(let value):
                 completion(value.results)
             case .failure(let error):
+                errorHandler(error.localizedDescription)
                 print(error)
             }
         }
     }
     
-    func getRecommend(api: TMDBRequest, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void) {
+    func getRecommend(api: TMDBRequest, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void, errorHandler: @escaping (String) -> Void) {
         AF.request(api.endpoint, method: api.method, parameters: api.parameter, headers: api.header).responseDecodable(of: ContentsImageData.self) { response in
             switch response.result {
             case .success(let value):
                 completion(value.results)
             case .failure(let error):
+                errorHandler(error.localizedDescription)
                 print(error)
             }
         }
     }
     
-    func getPosterImage(api: TMDBRequest, completion: @escaping ([MoviePosterData.Backdrops]) -> Void) {
+    func getPosterImage(api: TMDBRequest, completion: @escaping ([MoviePosterData.Backdrops]?, String?) -> Void) {
         AF.request(api.endpoint, method: api.method, parameters: api.parameter, headers: api.header).responseDecodable(of: MoviePosterData.self) { response in
             switch response.result {
             case .success(let value):
-                completion(value.backdrops)
+                completion(value.backdrops, nil)
             case .failure(let error):
+                completion(nil, "잠시 후 다시 시도해주세요.")
                 print(error)
             }
         }

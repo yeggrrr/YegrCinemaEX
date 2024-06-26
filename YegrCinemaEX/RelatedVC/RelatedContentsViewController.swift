@@ -90,22 +90,31 @@ class RelatedContentsViewController: UIViewController {
         DispatchQueue.global().async(group: group) {
             APICall.shared.getSimilar(api: .similar(id: id)) { results in
                 self.contentsImageList.append(results)
-                group.leave()
+            } errorHandler: { error in
+                self.showAlert(title: "비슷한 영화 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
             }
+            group.leave()
         }
         
         group.enter()
         DispatchQueue.global().async(group: group) {
             APICall.shared.getRecommend(api: .recommend(id: id)) { results in
                 self.contentsImageList.append(results)
-                group.leave()
+            } errorHandler: { error in
+                self.showAlert(title: "추천 영화 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
             }
+            group.leave()
         }
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            APICall.shared.getPosterImage(api: .poster(id: id)) { results in
-                self.posterImageList = results
+            APICall.shared.getPosterImage(api: .poster(id: id)) { results, error in
+                if let error = error {
+                    print(error)
+                } else {
+                    guard let results = results else { return }
+                    self.posterImageList = results
+                }
                 group.leave()
             }
         }

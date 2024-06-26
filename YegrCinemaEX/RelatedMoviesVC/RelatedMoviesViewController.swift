@@ -53,14 +53,23 @@ class RelatedMoviesViewController: UIViewController {
     func getData(id: Int) {
         APICall.shared.getSimilar(api: .similar(id: id)) { similarData in
             self.similarDataList = similarData
+        } errorHandler: { error in
+            self.showAlert(title: "비슷한 영화 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
         }
         
         APICall.shared.getRecommend(api: .recommend(id: id)) { recommendData in
             self.recommendDataList = recommendData
+        } errorHandler: { error in
+            self.showAlert(title: "추천 영화 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
         }
         
-        APICall.shared.getPosterImage(api: .poster(id: id)) { posterData in
-            self.posterDataList = posterData
+        APICall.shared.getPosterImage(api: .poster(id: id)) { posterData, error in
+            if let error = error {
+                print(error)
+            } else {
+                guard let posterData = posterData else { return }
+                self.posterDataList = posterData
+            }
         }
     }
     
