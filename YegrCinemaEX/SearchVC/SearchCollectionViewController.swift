@@ -122,6 +122,12 @@ extension SearchCollectionViewController: UICollectionViewDelegate, UICollection
         cell.configureCell(movieData: movieList)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(movieList[indexPath.row])
+        let searchDetailVC = SearchDetailViewController()
+        present(searchDetailVC, animated: true)
+    }
 }
 
 extension SearchCollectionViewController: UICollectionViewDataSourcePrefetching {
