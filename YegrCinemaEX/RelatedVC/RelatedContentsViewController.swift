@@ -88,7 +88,7 @@ class RelatedContentsViewController: UIViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            APICall.shared.getSimilar(id: id) { results in
+            APICall.shared.getSimilar(api: .similar(id: id)) { results in
                 self.contentsImageList.append(results)
                 group.leave()
             }
@@ -96,7 +96,7 @@ class RelatedContentsViewController: UIViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            APICall.shared.getRecommend(id: id) { results in
+            APICall.shared.getRecommend(api: .recommend(id: id)) { results in
                 self.contentsImageList.append(results)
                 group.leave()
             }
@@ -104,7 +104,7 @@ class RelatedContentsViewController: UIViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            APICall.shared.getPosterImage(id: id) { results in
+            APICall.shared.getPosterImage(api: .poster(id: id)) { results in
                 self.posterImageList = results
                 group.leave()
             }

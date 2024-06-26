@@ -136,20 +136,8 @@ class APICall {
         }
     }
     
-    func getSimilar(id: Int, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void) {
-        let url = APIURL.contentsURL + "\(id)/similar"
-        guard let similarURL = URL(string: url) else { return }
-        
-        let header: HTTPHeaders = [
-            "Authorization": APIKey.authorization,
-            "accept": APIKey.accept
-        ]
-        
-        let params: Parameters  =  [
-            "api_key": APIKey.apiKey
-        ]
-        
-        AF.request(similarURL, method: .get, parameters: params, headers: header).responseDecodable(of: ContentsImageData.self) { response in
+    func getSimilar(api: TMDBRequest, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void) {
+        AF.request(api.endpoint, method: api.method, parameters: api.parameter, headers: api.header).responseDecodable(of: ContentsImageData.self) { response in
             switch response.result {
             case .success(let value):
                 completion(value.results)
@@ -159,20 +147,8 @@ class APICall {
         }
     }
     
-    func getRecommend(id: Int, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void) {
-        let url = APIURL.contentsURL + "\(id)/recommendations"
-        guard let similarURL = URL(string: url) else { return }
-        
-        let header: HTTPHeaders = [
-            "Authorization": APIKey.authorization,
-            "accept": APIKey.accept
-        ]
-        
-        let params: Parameters  =  [
-            "api_key": APIKey.apiKey
-        ]
-        
-        AF.request(similarURL, method: .get, parameters: params, headers: header).responseDecodable(of: ContentsImageData.self) { response in
+    func getRecommend(api: TMDBRequest, completion: @escaping ([ContentsImageData.ContentsResults]) -> Void) {
+        AF.request(api.endpoint, method: api.method, parameters: api.parameter, headers: api.header).responseDecodable(of: ContentsImageData.self) { response in
             switch response.result {
             case .success(let value):
                 completion(value.results)
@@ -182,20 +158,8 @@ class APICall {
         }
     }
     
-    func getPosterImage(id: Int, completion: @escaping ([MoviePosterData.Backdrops]) -> Void) {
-        let url = APIURL.contentsURL + "\(id)/images"
-        guard let similarURL = URL(string: url) else { return }
-        
-        let header: HTTPHeaders = [
-            "Authorization": APIKey.authorization,
-            "accept": APIKey.accept
-        ]
-        
-        let params: Parameters  =  [
-            "api_key": APIKey.apiKey
-        ]
-        
-        AF.request(similarURL, method: .get, parameters: params, headers: header).responseDecodable(of: MoviePosterData.self) { response in
+    func getPosterImage(api: TMDBRequest, completion: @escaping ([MoviePosterData.Backdrops]) -> Void) {
+        AF.request(api.endpoint, method: api.method, parameters: api.parameter, headers: api.header).responseDecodable(of: MoviePosterData.self) { response in
             switch response.result {
             case .success(let value):
                 completion(value.backdrops)
