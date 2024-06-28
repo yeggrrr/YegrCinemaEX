@@ -20,6 +20,8 @@ class MainViewController: UIViewController {
             for id in idList {
                 APICall.shared.getCreditsData(api: .credits(id: id)) { creditData in
                     self.castData.append(creditData.cast)
+                } errorHandler: { String in
+                    print("Error Alert 넣기")
                 }
             }
         }
@@ -74,13 +76,16 @@ class MainViewController: UIViewController {
     func getGenreData() {
         APICall.shared.getGenreData(api: .genre) { genreData in
             self.genreList = genreData.genres
+        } errorHandler: { String in
+            print("Error Alert 넣기")
         }
     }
     
     func getMovieData() {
-
         APICall.shared.getMovieData(api: .movies) { movieData in
             self.resultList = movieData.results
+        } errorHandler: { String in
+            print("Error Alert 넣기")
         }
     }
     
@@ -112,14 +117,9 @@ class MainViewController: UIViewController {
     }
     
     @objc func clipButtonClicked(_ sender: UIButton) {
-        // let item = resultList[sender.tag]
-        // let relatedMoviesVC = RelatedMoviesViewController()
-        // relatedMoviesVC.movieTitle = item.title
-        // relatedMoviesVC.id = item.id
-        // navigationController?.pushViewController(relatedMoviesVC, animated: true)
-        
+        // let relatedMoviesVC = RelatedMoviesViewController() // 1
+        let relatedVC = RelatedContentsViewController() // 2
         let item = resultList[sender.tag]
-        let relatedVC = RelatedContentsViewController()
         relatedVC.movieTitle = item.title
         relatedVC.id = item.id
         navigationController?.pushViewController(relatedVC, animated: true)

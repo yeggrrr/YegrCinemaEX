@@ -97,21 +97,24 @@ extension SearchCollectionViewController: UISearchBarDelegate {
         guard let searchText = searchBar.text else { return }
         
         APICall.shared.getSearchData(api: .search(query: searchText, page: 1)) { searchData in
-            self.lastPage = searchData.totalPages
-            if self.page == 1 {
-                self.movieList = searchData.results
-            } else {
-                self.movieList.append(contentsOf: searchData.results)
-            }
-            
-            if self.movieList.isEmpty {
-                self.noticeLabel.isHidden = false
-                self.noticeLabel.text = "검색 결과 없음"
-            } else {
-                self.noticeLabel.isHidden = true
-            }
-            self.searchCollectionView.reloadData()
+                self.lastPage = searchData.totalPages
+                if self.page == 1 {
+                    self.movieList = searchData.results
+                } else {
+                    self.movieList.append(contentsOf: searchData.results)
+                }
+                
+                if self.movieList.isEmpty {
+                    self.noticeLabel.isHidden = false
+                    self.noticeLabel.text = "검색 결과 없음"
+                } else {
+                    self.noticeLabel.isHidden = true
+                }
+                self.searchCollectionView.reloadData()
+        } errorHandler: { String in
+            print("오류 alert 넣기")
         }
+        
     }
 }
 
@@ -144,6 +147,8 @@ extension SearchCollectionViewController: UICollectionViewDataSourcePrefetching 
                     guard let text = searchBar.text else { return }
                     APICall.shared.getSearchData(api: .search(query: text, page: page)) { movieData in
                         self.movieList.append(contentsOf: movieData.results)
+                    } errorHandler: { String in
+                        print("Error alert 넣기")
                     }
                 }
             }
