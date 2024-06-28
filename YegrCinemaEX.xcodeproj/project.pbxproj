@@ -155,21 +155,12 @@
 		686052782C2AAEE700D60EA0 /* RelatedVC */ = {
 			isa = PBXGroup;
 			children = (
-				6860527F2C2AB75300D60EA0 /* Model */,
 				686052882C2B232C00D60EA0 /* CollectionView */,
 				686052792C2AAFB100D60EA0 /* RelatedContentsViewController.swift */,
 				6860527B2C2AB13D00D60EA0 /* RelatedContentsTableViewCell.swift */,
 				6860527D2C2AB51200D60EA0 /* RelatedContentsCollectionViewCell.swift */,
 			);
 			path = RelatedVC;
-			sourceTree = "<group>";
-		};
-		6860527F2C2AB75300D60EA0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				686052802C2AB77000D60EA0 /* ContentsImageData.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		686052882C2B232C00D60EA0 /* CollectionView */ = {
@@ -188,6 +179,16 @@
 				686052962C2C63C700D60EA0 /* SearchDetailViewController.swift */,
 			);
 			path = SearchDetailVC;
+			sourceTree = "<group>";
+		};
+		686052A02C2EE74500D60EA0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				68F161FC2C170DB00059FA66 /* MovieData.swift */,
+				68F1621A2C18A47C0059FA66 /* SearchData.swift */,
+				686052802C2AB77000D60EA0 /* ContentsImageData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		68F161C52C16D5650059FA66 = {
@@ -215,6 +216,7 @@
 				68F161DA2C16D5660059FA66 /* Assets.xcassets */,
 				68F161DC2C16D5660059FA66 /* LaunchScreen.storyboard */,
 				6860522D2C2957BE00D60EA0 /* Network */,
+				686052A02C2EE74500D60EA0 /* Model */,
 				68F161EB2C16D87F0059FA66 /* MainVC */,
 				68F161EC2C16D88D0059FA66 /* DetailVC */,
 				68F162152C18675E0059FA66 /* SearchVC */,
@@ -243,7 +245,6 @@
 		68F161EB2C16D87F0059FA66 /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
-				68F161FC2C170DB00059FA66 /* MovieData.swift */,
 				68F161FA2C16F1010059FA66 /* MainTableViewCell.swift */,
 				68F161D52C16D5650059FA66 /* MainViewController.swift */,
 			);
@@ -263,7 +264,6 @@
 		68F162152C18675E0059FA66 /* SearchVC */ = {
 			isa = PBXGroup;
 			children = (
-				68F1621A2C18A47C0059FA66 /* SearchData.swift */,
 				68F162182C189D880059FA66 /* SearchCollectionViewCell.swift */,
 				68F162162C1867C20059FA66 /* SearchCollectionViewController.swift */,
 			);
