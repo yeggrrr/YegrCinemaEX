@@ -42,7 +42,6 @@ class SearchCollectionViewController: UIViewController {
         searchBar.delegate = self
         searchBar.placeholder = "영화 제목을 입력하세요"
         
-        noticeLabel.text = "검색 결과 없음"
         noticeLabel.textAlignment = .center
         noticeLabel.textColor = .label
         noticeLabel.font = .systemFont(ofSize: 17, weight: .bold)
@@ -72,6 +71,10 @@ class SearchCollectionViewController: UIViewController {
         }
     }
     
+    func dismissKeyboard() {
+        searchBar.resignFirstResponder()
+    }
+    
     static func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width - 20
@@ -86,12 +89,14 @@ class SearchCollectionViewController: UIViewController {
 
 extension SearchCollectionViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        dismissKeyboard()
+        
         searchCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         page = 1
         movieList.removeAll()
-        guard let text = searchBar.text else { return }
+        guard let searchText = searchBar.text else { return }
         
-        APICall.shared.getSearchData(api: .search(query: text, page: 1)) { searchData in
+        APICall.shared.getSearchData(api: .search(query: searchText, page: 1)) { searchData in
             self.lastPage = searchData.totalPages
             if self.page == 1 {
                 self.movieList = searchData.results
@@ -101,6 +106,7 @@ extension SearchCollectionViewController: UISearchBarDelegate {
             
             if self.movieList.isEmpty {
                 self.noticeLabel.isHidden = false
+                self.noticeLabel.text = "검색 결과 없음"
             } else {
                 self.noticeLabel.isHidden = true
             }
