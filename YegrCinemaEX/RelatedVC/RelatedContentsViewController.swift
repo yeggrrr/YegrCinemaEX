@@ -112,7 +112,7 @@ class RelatedContentsViewController: UIViewController {
         DispatchQueue.global().async(group: group) {
             APICall.shared.getPosterImage(api: .poster(id: id)) { results, error in
                 if let error = error {
-                    print(error)
+                    self.showAlert(title: "영화 포스터 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
                 } else {
                     guard let results = results else { return }
                     self.posterImageList = results

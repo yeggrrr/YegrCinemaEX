@@ -112,7 +112,7 @@ extension SearchCollectionViewController: UISearchBarDelegate {
                 }
                 self.searchCollectionView.reloadData()
         } errorHandler: { String in
-            print("오류 alert 넣기")
+            self.showAlert(title: "영화 검색 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
         }
         
     }
@@ -148,7 +148,7 @@ extension SearchCollectionViewController: UICollectionViewDataSourcePrefetching 
                     APICall.shared.getSearchData(api: .search(query: text, page: page)) { movieData in
                         self.movieList.append(contentsOf: movieData.results)
                     } errorHandler: { String in
-                        print("Error alert 넣기")
+                        self.showAlert(title: "영화 검색 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
                     }
                 }
             }

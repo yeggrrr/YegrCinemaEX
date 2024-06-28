@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
                 APICall.shared.getCreditsData(api: .credits(id: id)) { creditData in
                     self.castData.append(creditData.cast)
                 } errorHandler: { String in
-                    print("Error Alert 넣기")
+                    self.showAlert(title: "cast 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
                 }
             }
         }
@@ -77,7 +77,7 @@ class MainViewController: UIViewController {
         APICall.shared.getGenreData(api: .genre) { genreData in
             self.genreList = genreData.genres
         } errorHandler: { String in
-            print("Error Alert 넣기")
+            self.showAlert(title: "영화 장르 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
         }
     }
     
@@ -85,7 +85,7 @@ class MainViewController: UIViewController {
         APICall.shared.getMovieData(api: .movies) { movieData in
             self.resultList = movieData.results
         } errorHandler: { String in
-            print("Error Alert 넣기")
+            self.showAlert(title: "영화 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
         }
     }
     
