@@ -13,6 +13,7 @@ import Kingfisher
 class SearchCollectionViewController: UIViewController {
     let searchBar = UISearchBar()
     let searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    let noticeLabel = UILabel()
     var page = 1
     var lastPage: Int?
     
@@ -25,8 +26,8 @@ class SearchCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
         configureLayout()
+        configureUI()
     }
     
     func configureUI() {
@@ -40,11 +41,18 @@ class SearchCollectionViewController: UIViewController {
         
         searchBar.delegate = self
         searchBar.placeholder = "영화 제목을 입력하세요"
+        
+        noticeLabel.text = "검색 결과 없음"
+        noticeLabel.textAlignment = .center
+        noticeLabel.textColor = .label
+        noticeLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        noticeLabel.isHidden = true
     }
     
     func configureLayout() {
         view.addSubview(searchBar)
         view.addSubview(searchCollectionView)
+        view.addSubview(noticeLabel)
         
         let safeArea = view.safeAreaLayoutGuide
         
@@ -57,6 +65,10 @@ class SearchCollectionViewController: UIViewController {
             $0.top.equalTo(searchBar.snp.bottom)
             $0.horizontalEdges.equalTo(safeArea)
             $0.bottom.equalTo(view)
+        }
+        
+        noticeLabel.snp.makeConstraints {
+            $0.center.equalTo(searchCollectionView.snp.center)
         }
     }
     
@@ -78,6 +90,7 @@ extension SearchCollectionViewController: UISearchBarDelegate {
         page = 1
         movieList.removeAll()
         guard let text = searchBar.text else { return }
+        
         APICall.shared.getSearchData(api: .search(query: text, page: 1)) { searchData in
             self.lastPage = searchData.totalPages
             if self.page == 1 {
@@ -85,6 +98,13 @@ extension SearchCollectionViewController: UISearchBarDelegate {
             } else {
                 self.movieList.append(contentsOf: searchData.results)
             }
+            
+            if self.movieList.isEmpty {
+                self.noticeLabel.isHidden = false
+            } else {
+                self.noticeLabel.isHidden = true
+            }
+            self.searchCollectionView.reloadData()
         }
     }
 }
