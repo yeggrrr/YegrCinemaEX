@@ -18,9 +18,11 @@ class MainViewController: UIViewController {
             let idList = resultList.map { $0.id }
             
             for id in idList {
-                APICall.shared.getCreditsData(api: .credits(id: id)) { creditData in
-                    self.castData.append(creditData.cast)
-                } errorHandler: { String in
+                APICall.shared.callRequest(api: .credits(id: id), model: CreditData.self) { creditData in
+                    if let creditData = creditData {
+                        self.castData.append(creditData.cast)
+                    }
+                } errorHandler: { _ in
                     self.showAlert(title: "cast 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
                 }
             }
@@ -74,17 +76,23 @@ class MainViewController: UIViewController {
     }
     
     func getGenreData() {
-        APICall.shared.getGenreData(api: .genre) { genreData in
+        APICall.shared.callRequest(api: .genre, model: GenreData.self) { genreData in
+            guard let genreData = genreData else {
+                print("CallgenreData Error", #function)
+                return }
             self.genreList = genreData.genres
-        } errorHandler: { String in
+        } errorHandler: { _ in
             self.showAlert(title: "영화 장르 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
         }
     }
     
     func getMovieData() {
-        APICall.shared.getMovieData(api: .movies) { movieData in
+        APICall.shared.callRequest(api: .movies, model: MovieData.self) { movieData in
+            guard let movieData = movieData else {
+                print("CallMovieData Error", #function)
+                return }
             self.resultList = movieData.results
-        } errorHandler: { String in
+        } errorHandler: { _ in
             self.showAlert(title: "영화 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
         }
     }

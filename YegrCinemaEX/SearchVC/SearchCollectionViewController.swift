@@ -95,25 +95,28 @@ extension SearchCollectionViewController: UISearchBarDelegate {
         page = 1
         movieList.removeAll()
         guard let searchText = searchBar.text else { return }
-        
-        APICall.shared.getSearchData(api: .search(query: searchText, page: 1)) { searchData in
-                self.lastPage = searchData.totalPages
-                if self.page == 1 {
-                    self.movieList = searchData.results
-                } else {
-                    self.movieList.append(contentsOf: searchData.results)
-                }
-                
-                if self.movieList.isEmpty {
-                    self.noticeLabel.isHidden = false
-                    self.noticeLabel.text = "검색 결과 없음"
-                } else {
-                    self.noticeLabel.isHidden = true
-                }
-                self.searchCollectionView.reloadData()
-        } errorHandler: { String in
+        APICall.shared.callRequest(api: .search(query: searchText, page: 1), model: SearchMovie.self) { searchData in
+            guard let searchData = searchData else {
+                print("CallsearchData Error", #function)
+                return }
+            self.lastPage = searchData.totalPages
+            if self.page == 1 {
+                self.movieList = searchData.results
+            } else {
+                self.movieList.append(contentsOf: searchData.results)
+            }
+            
+            if self.movieList.isEmpty {
+                self.noticeLabel.isHidden = false
+                self.noticeLabel.text = "검색 결과 없음"
+            } else {
+                self.noticeLabel.isHidden = true
+            }
+            self.searchCollectionView.reloadData()
+        } errorHandler: { _ in
             self.showAlert(title: "영화 검색 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
         }
+
         
     }
 }
@@ -145,11 +148,15 @@ extension SearchCollectionViewController: UICollectionViewDataSourcePrefetching 
                 if 20 * (page - 1) < indexPath.item {
                     page += 1
                     guard let text = searchBar.text else { return }
-                    APICall.shared.getSearchData(api: .search(query: text, page: page)) { movieData in
+                    APICall.shared.callRequest(api: .search(query: text, page: page), model: SearchMovie.self) { movieData in
+                        guard let movieData = movieData else {
+                            print("callMovieData Error", #function)
+                            return }
                         self.movieList.append(contentsOf: movieData.results)
-                    } errorHandler: { String in
+                    } errorHandler: { _ in
                         self.showAlert(title: "영화 검색 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
                     }
+
                 }
             }
         }

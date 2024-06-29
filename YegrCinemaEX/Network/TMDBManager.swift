@@ -10,50 +10,14 @@ import Alamofire
 
 class APICall {
     static let shared = APICall()
-
-    func getGenreData(api: TMDBRequest, completion: @escaping(GenreData) -> Void, errorHandler: @escaping (String) -> Void) {
-        AF.request(api.endpoint, method: api.method, parameters: api.parameter, headers: api.header).responseDecodable(of: GenreData.self) { response in
-            switch response.result {
-            case .success(let value):
-                completion(value)
-            case .failure(let error):
-                errorHandler("GenreData 정보를 가져오지 못했습니다.")
-                print(error)
-            }
-        }
-    }
     
-    func getMovieData(api: TMDBRequest, completion: @escaping(MovieData) -> Void, errorHandler: @escaping (String) -> Void) {
-        AF.request(api.endpoint, method: api.method, headers: api.header).responseDecodable(of: MovieData.self) { response in
+    func callRequest<T: Decodable>(api: TMDBRequest, model: T.Type, completion: @escaping(T?) -> Void, errorHandler: @escaping (String) -> Void) {
+        AF.request(api.endpoint, method: api.method, parameters: api.parameter, headers: api.header).responseDecodable(of: T.self) { response in
             switch response.result {
             case .success(let value):
                 completion(value)
             case .failure(let error):
-                errorHandler("MovieData 정보를 가져오지 못했습니다.")
-                print(error)
-            }
-        }
-    }
-    
-    func getCreditsData(api: TMDBRequest, completion: @escaping (CreditData) -> Void, errorHandler: @escaping (String) -> Void) {
-        AF.request(api.endpoint, method: api.method, parameters: api.parameter).responseDecodable(of: CreditData.self) { response in
-            switch response.result {
-            case .success(let value):
-                completion(value)
-            case .failure(let error):
-                errorHandler("CreditData 정보를 가져오지 못했습니다.")
-                print(error)
-            }
-        }
-    }
-
-    func getSearchData(api: TMDBRequest, completion: @escaping (SearchMovie) -> Void, errorHandler: @escaping (String) -> Void) {
-        AF.request(api.endpoint, method: api.method, headers: api.header).responseDecodable(of: SearchMovie.self) { response in
-            switch response.result {
-            case .success(let value):
-                completion(value)
-            case .failure(let error):
-                errorHandler("SearchData 정보를 가져오지 못했습니다")
+                errorHandler("\(T.self)의 정보를 가져오지 못했습니다.")
                 print(error)
             }
         }
