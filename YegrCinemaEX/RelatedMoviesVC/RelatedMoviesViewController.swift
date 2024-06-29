@@ -64,7 +64,7 @@ class RelatedMoviesViewController: UIViewController {
         }
         
         APICall.shared.getPosterImage(api: .poster(id: id)) { posterData, error in
-            if let error = error {
+            if error != nil {
                 self.showAlert(title: "영화 포스터 정보를 가져오지 못했습니다. 잠시 후 다시 시도해주세요.")
             } else {
                 guard let posterData = posterData else { return }
