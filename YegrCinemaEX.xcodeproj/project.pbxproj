@@ -30,6 +30,7 @@
 		686052FA2C32AF1200D60EA0 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052F92C32AF1200D60EA0 /* VideoViewController.swift */; };
 		686052FC2C32B03500D60EA0 /* PopularSeriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052FB2C32B03500D60EA0 /* PopularSeriesData.swift */; };
 		686052FE2C32B98400D60EA0 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052FD2C32B98400D60EA0 /* VideoCollectionViewCell.swift */; };
+		686053002C32C6DE00D60EA0 /* YouTubeWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686052FF2C32C6DE00D60EA0 /* YouTubeWebViewController.swift */; };
 		68F161D22C16D5650059FA66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D12C16D5650059FA66 /* AppDelegate.swift */; };
 		68F161D42C16D5650059FA66 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D32C16D5650059FA66 /* SceneDelegate.swift */; };
 		68F161D62C16D5650059FA66 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F161D52C16D5650059FA66 /* MainViewController.swift */; };
@@ -77,6 +78,7 @@
 		686052F92C32AF1200D60EA0 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		686052FB2C32B03500D60EA0 /* PopularSeriesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularSeriesData.swift; sourceTree = "<group>"; };
 		686052FD2C32B98400D60EA0 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		686052FF2C32C6DE00D60EA0 /* YouTubeWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeWebViewController.swift; sourceTree = "<group>"; };
 		68F161CE2C16D5650059FA66 /* YegrCinemaEX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YegrCinemaEX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F161D12C16D5650059FA66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68F161D32C16D5650059FA66 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,8 +213,9 @@
 		686052F82C32AEF500D60EA0 /* VideoVC */ = {
 			isa = PBXGroup;
 			children = (
-				686052F92C32AF1200D60EA0 /* VideoViewController.swift */,
 				686052FD2C32B98400D60EA0 /* VideoCollectionViewCell.swift */,
+				686052F92C32AF1200D60EA0 /* VideoViewController.swift */,
+				686052FF2C32C6DE00D60EA0 /* YouTubeWebViewController.swift */,
 			);
 			path = VideoVC;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				6860528C2C2B236B00D60EA0 /* PostersView.swift in Sources */,
 				686052812C2AB77000D60EA0 /* ContentsImageData.swift in Sources */,
 				686052922C2C002F00D60EA0 /* TMDBRequest.swift in Sources */,
+				686053002C32C6DE00D60EA0 /* YouTubeWebViewController.swift in Sources */,
 				68F161FD2C170DB00059FA66 /* MovieData.swift in Sources */,
 				68F162192C189D880059FA66 /* SearchCollectionViewCell.swift in Sources */,
 				686052F72C3296EA00D60EA0 /* NasaViewController.swift in Sources */,

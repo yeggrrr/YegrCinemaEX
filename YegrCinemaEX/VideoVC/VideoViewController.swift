@@ -12,9 +12,25 @@ class VideoViewController: UIViewController {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     var seriesList: [PopularSeriesList.Results] = [] {
         didSet {
+            let idList = seriesList.map { $0.id }
+            
+            for id in idList {
+                APICall.shared.callRequest(api: .videos(id: id), model: YouTubeLinkKey.self) { keyResults in
+                    if let keyResults = keyResults, !keyResults.results.isEmpty {
+                        self.keyList.append(keyResults.results[0].key)
+                    } else {
+                        self.keyList.append(nil)
+                    }
+                } errorHandler: { error in
+                    print(error)
+                }
+            }
+            
             collectionView.reloadData()
         }
     }
+    
+    var keyList: [String?] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +41,10 @@ class VideoViewController: UIViewController {
     
     func configureUI() {
         view.backgroundColor = .white
+        
         title = "비디오"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = .black
         
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints {
@@ -42,7 +61,6 @@ class VideoViewController: UIViewController {
         APICall.shared.callRequest(api: .popularSeries, model: PopularSeriesList.self) { seriesData in
             guard let seriesData = seriesData else { return }
             self.seriesList.append(contentsOf: seriesData.results)
-            print(self.seriesList)
         } errorHandler: { error in
             print(error)
         }
@@ -70,10 +88,18 @@ extension VideoViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.id, for: indexPath) as? VideoCollectionViewCell else { return UICollectionViewCell() }
         cell.configureCell(seriesData: seriesList[indexPath.item])
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(#function)
+        if keyList[indexPath.item] != nil {
+            let vc = YouTubeWebViewController()
+            vc.series = seriesList[indexPath.item]
+            vc.key = keyList[indexPath.item]
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showAlert(title: "해당 영상이 준비되어 있지 않습니다.")
+        }
     }
 }
