@@ -21,4 +21,11 @@ extension UILabel {
         font = fontStyle
         numberOfLines = 0
     }
+    
+    func videoUI(txtColor: UIColor, txtAlignment: NSTextAlignment, fontStyle: UIFont, titleNumberOfLines: Int) {
+        textColor = txtColor
+        textAlignment = txtAlignment
+        font = fontStyle
+        numberOfLines = titleNumberOfLines
+    }
 }

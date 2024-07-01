@@ -15,4 +15,10 @@ extension UIImageView {
         layer.borderColor = borderColor
         layer.masksToBounds = true
     }
+    
+    func VideoUI() {
+        contentMode = .scaleAspectFill
+        layer.cornerRadius = 20
+        clipsToBounds = true
+    }
 }

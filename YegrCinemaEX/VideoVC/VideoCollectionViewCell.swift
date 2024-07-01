@@ -70,19 +70,9 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
     
     func configureUI() {
-        titleLabel.textColor = .label
-        titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 0
-        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
-        
-        posterImageView.contentMode = .scaleAspectFill
-        posterImageView.layer.cornerRadius = 20
-        posterImageView.clipsToBounds = true
-        
-        overviewLabel.textColor = .label
-        overviewLabel.textAlignment = .left
-        overviewLabel.numberOfLines = 0
-        overviewLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        titleLabel.videoUI(txtColor: .label, txtAlignment: .center, fontStyle: .systemFont(ofSize: 22, weight: .bold), titleNumberOfLines: 0)
+        overviewLabel.videoUI(txtColor: .label, txtAlignment: .left, fontStyle: .systemFont(ofSize: 17, weight: .regular), titleNumberOfLines: 0)
+        posterImageView.VideoUI()
     }
     
     func configureCell(seriesData: PopularSeriesList.Results) {
@@ -90,6 +80,10 @@ class VideoCollectionViewCell: UICollectionViewCell {
         let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
         titleLabel.text = seriesData.name
         posterImageView.kf.setImage(with: imageURL)
-        overviewLabel.text = seriesData.overview
+        if seriesData.overview == "" {
+            overviewLabel.text = "No overview information"
+        } else {
+            overviewLabel.text = seriesData.overview
+        }
     }
 }
