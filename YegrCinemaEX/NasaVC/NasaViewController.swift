@@ -121,6 +121,8 @@ extension NasaViewController: URLSessionDataDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
         if let error = error {
             progressLabel.text = "문제가 발생했습니다."
+            let defaultImage = UIImage(systemName: "star")
+            nasaImageView.image = defaultImage
         } else {
             print("SUCCESS")
             guard let buffer = buffer else {
