@@ -39,19 +39,19 @@ class VideoCollectionViewCell: UICollectionViewCell {
         let safeArea = contentView.safeAreaLayoutGuide
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeArea).offset(20)
-            $0.horizontalEdges.equalTo(safeArea).inset(20)
-            $0.height.equalTo(30)
+            $0.horizontalEdges.equalTo(safeArea).inset(10)
+            $0.height.equalTo(40)
         }
         
         posterImageView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.horizontalEdges.equalTo(safeArea).inset(20)
-            $0.height.equalTo(400)
+            $0.horizontalEdges.equalTo(safeArea).inset(10)
+            $0.height.equalTo(380)
         }
         
         overviewScrollView.snp.makeConstraints {
             $0.top.equalTo(posterImageView.snp.bottom).offset(20)
-            $0.horizontalEdges.equalTo(safeArea).inset(30)
+            $0.horizontalEdges.equalTo(safeArea).inset(20)
             $0.bottom.equalTo(safeArea).offset(-20)
         }
         
@@ -70,19 +70,26 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
     
     func configureUI() {
-        titleLabel.text = "제목"
         titleLabel.textColor = .label
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         
-        posterImageView.backgroundColor = .systemGray6
+        posterImageView.contentMode = .scaleAspectFill
+        posterImageView.layer.cornerRadius = 20
+        posterImageView.clipsToBounds = true
         
-        overviewLabel.text = "fskhfaksfhakjhfskhfaksfhakjhfskhfaksfhakjhfskhfaksfhakjhfskhfaksfhakjhfskhfaksfhakjh"
         overviewLabel.textColor = .label
         overviewLabel.textAlignment = .left
         overviewLabel.numberOfLines = 0
         overviewLabel.font = .systemFont(ofSize: 17, weight: .bold)
-        
+    }
+    
+    func configureCell(seriesData: PopularSeriesList.Results) {
+        guard let posterImage = URL(string: seriesData.posterPath) else { return }
+        let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(posterImage)")
+        titleLabel.text = seriesData.name
+        posterImageView.kf.setImage(with: imageURL)
+        overviewLabel.text = seriesData.overview
     }
 }

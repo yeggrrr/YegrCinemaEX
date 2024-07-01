@@ -10,16 +10,21 @@ import SnapKit
 
 class VideoViewController: UIViewController {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    var seriesList: [PopularSeriesList.Results] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
-        // callRequest()
+        callRequest()
     }
     
     func configureUI() {
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = .white
         title = "비디오"
         
         view.addSubview(collectionView)
@@ -27,7 +32,6 @@ class VideoViewController: UIViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
         
-        collectionView.backgroundColor = .darkGray
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: VideoCollectionViewCell.id)
@@ -35,8 +39,10 @@ class VideoViewController: UIViewController {
     }
     
     func callRequest() {
-        APICall.shared.callRequest(api: .popularSeries, model: PopularSeriesList.self) { results in
-            dump(results)
+        APICall.shared.callRequest(api: .popularSeries, model: PopularSeriesList.self) { seriesData in
+            guard let seriesData = seriesData else { return }
+            self.seriesList.append(contentsOf: seriesData.results)
+            print(self.seriesList)
         } errorHandler: { error in
             print(error)
         }
@@ -58,11 +64,16 @@ class VideoViewController: UIViewController {
 
 extension VideoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return seriesList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.id, for: indexPath) as? VideoCollectionViewCell else { return UICollectionViewCell() }
+        cell.configureCell(seriesData: seriesList[indexPath.item])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(#function)
     }
 }
