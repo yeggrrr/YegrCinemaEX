@@ -35,8 +35,12 @@ class NasaViewController: UIViewController {
     var total: Double = 0
     var buffer: Data? {
         didSet {
-            let result = Double(buffer?.count ?? 0) / total
+            guard let buffer = buffer else { return }
+            let result = Double(buffer.count) / total
             progressLabel.text = "\(String(format: "%.1f", result * 100)) / 100"
+            if Double(buffer.count) == total {
+                requestButton.isEnabled = true
+            }
         }
     }
     
@@ -95,6 +99,7 @@ class NasaViewController: UIViewController {
     }
     
     @objc func requestButtonClicked() {
+        requestButton.isEnabled = false
         buffer = Data()
         callRequest()
     }
@@ -103,11 +108,10 @@ class NasaViewController: UIViewController {
 extension NasaViewController: URLSessionDataDelegate {
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse) async -> URLSession.ResponseDisposition {
         if let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) {
-            if let contentLength = response.value(forHTTPHeaderField: "Content-Length") {
-                if let stringToDoubleLength = Double(contentLength) {
-                    total = stringToDoubleLength
-                    return .allow
-                }
+            guard let contentLength = response.value(forHTTPHeaderField: "Content-Length") else { return .cancel}
+            if let stringToDoubleLength = Double(contentLength) {
+                total = stringToDoubleLength
+                return .allow
             }
         }
         
@@ -120,6 +124,7 @@ extension NasaViewController: URLSessionDataDelegate {
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
         if let error = error {
+            print(error)
             progressLabel.text = "문제가 발생했습니다."
             let defaultImage = UIImage(systemName: "star")
             nasaImageView.image = defaultImage
