@@ -34,8 +34,6 @@ class YouTubeWebViewController: UIViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
-        webView.backgroundColor = .systemGray
-        
         guard let key = key else { return }
         let youTubeLink = "https://www.youtube.com/watch?v=\(key)"
         guard let youTubeURL = URL(string: youTubeLink) else {

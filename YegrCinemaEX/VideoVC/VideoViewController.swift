@@ -40,7 +40,7 @@ class VideoViewController: UIViewController {
     }
     
     func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
         
         title = "비디오"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -48,13 +48,14 @@ class VideoViewController: UIViewController {
         
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.edges.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
         
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: VideoCollectionViewCell.id)
         collectionView.isPagingEnabled = true
+        collectionView.layer.cornerRadius = 20
     }
     
     func callRequest() {
@@ -68,8 +69,8 @@ class VideoViewController: UIViewController {
     
     static func collectionViewLayout() -> UICollectionViewLayout {
         let layout  = UICollectionViewFlowLayout()
-        let sectionSpacing: CGFloat = 10
-        let cellSpacing: CGFloat = 10
+        let sectionSpacing: CGFloat = 5
+        let cellSpacing: CGFloat = 5
         let width = UIScreen.main.bounds.width - (sectionSpacing * 2) - (cellSpacing * 2)
         layout.itemSize = CGSize(width: width, height: width * 2)
         layout.scrollDirection = .horizontal
