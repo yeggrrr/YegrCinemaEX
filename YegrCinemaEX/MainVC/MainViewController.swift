@@ -116,7 +116,8 @@ class MainViewController: UIViewController {
     }
     
     @objc func leftBarButtonClicked() {
-        print(#function)
+        let videoVC = VideoViewController()
+        navigationController?.pushViewController(videoVC, animated: true)
     }
     
     @objc func rightBarButtonClicked() {

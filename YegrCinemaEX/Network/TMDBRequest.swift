@@ -16,6 +16,7 @@ enum TMDBRequest {
     case similar(id: Int)
     case recommend(id: Int)
     case poster(id: Int)
+    case popularSeries
     
     var baseURL: String {
         return "https://api.themoviedb.org/3/"
@@ -37,6 +38,8 @@ enum TMDBRequest {
             return URL(string: baseURL + "movie/\(id)/recommendations")!
         case .poster(let id):
             return URL(string: baseURL + "movie/\(id)/images")!
+        case .popularSeries:
+            return URL(string: baseURL + "tv/popular")!
         }
     }
     
