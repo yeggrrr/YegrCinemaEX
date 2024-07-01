@@ -63,6 +63,7 @@ class DetailOverViewTableViewCell: UITableViewCell {
         } else {
             overViewLabel.numberOfLines = 2
         }
+        
         tableVew?.reloadData()
     }
 }
