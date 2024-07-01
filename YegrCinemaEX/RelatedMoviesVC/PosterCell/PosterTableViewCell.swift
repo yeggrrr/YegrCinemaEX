@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-class PosterTableViewCell: UITableViewCell {
-    let titleLabel = UILabel()
+final class PosterTableViewCell: UITableViewCell {
+    private let titleLabel = UILabel()
     let posterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
-    var posterResults: [MoviePosterData.Backdrops] = []
+    private var posterResults: [MoviePosterData.Backdrops] = []
     
-    var cellType: CellType = .none
+    private var cellType: CellType = .none
     
     enum CellType {
         case exist
@@ -43,7 +43,7 @@ class PosterTableViewCell: UITableViewCell {
         posterCollectionView.reloadData()
     }
     
-    func configureUI() {
+    private func configureUI() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(posterCollectionView)
         
@@ -67,13 +67,13 @@ class PosterTableViewCell: UITableViewCell {
         posterCollectionView.backgroundColor = .white
     }
     
-    func configureCollectionView() {
+    private func configureCollectionView() {
         posterCollectionView.dataSource = self
         posterCollectionView.delegate = self
         posterCollectionView.register(PosterCollectionViewCell.self, forCellWithReuseIdentifier: PosterCollectionViewCell.id)
     }
     
-    static func collectionViewLayout() -> UICollectionViewLayout {
+    private static func collectionViewLayout() -> UICollectionViewLayout {
         let layout  = UICollectionViewFlowLayout()
         let sectionSpacing: CGFloat = 5
         let cellSpacing: CGFloat = 5

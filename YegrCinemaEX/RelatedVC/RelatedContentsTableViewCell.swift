@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RelatedContentsTableViewCell: UITableViewCell {
+final class RelatedContentsTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
     let contentsView = ContentsView()
     let postersView = PostersView()
@@ -38,13 +38,13 @@ class RelatedContentsTableViewCell: UITableViewCell {
         }
     }
     
-    func configureHierarchy() {
+    private func configureHierarchy() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(contentsView)
         contentView.addSubview(postersView)
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         let safeArea = contentView.safeAreaLayoutGuide
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeArea).offset(5)
@@ -69,7 +69,7 @@ class RelatedContentsTableViewCell: UITableViewCell {
         titleLabel.text = title
     }
     
-    func configureView() {
+    private func configureView() {
         titleLabel.textColor = .label
         titleLabel.textAlignment = .left
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)

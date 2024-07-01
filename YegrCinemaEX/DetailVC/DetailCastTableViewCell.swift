@@ -9,12 +9,12 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class DetailCastTableViewCell: UITableViewCell {
-    let profileImageView = UIImageView()
+final class DetailCastTableViewCell: UITableViewCell {
+    private let profileImageView = UIImageView()
     
-    let labelStackView = UIStackView()
-    let nameLabel = UILabel()
-    let characterLabel = UILabel()
+    private let labelStackView = UIStackView()
+    private let nameLabel = UILabel()
+    private let characterLabel = UILabel()
 
     var index: Int?
     
@@ -27,7 +27,7 @@ class DetailCastTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    private func configureUI() {
         backgroundColor = .white
         
         // configureHierarchy

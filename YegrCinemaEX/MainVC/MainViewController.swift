@@ -10,10 +10,10 @@ import SnapKit
 import Alamofire
 import Kingfisher
 
-class MainViewController: UIViewController {
-    let trendTableView = UITableView()
-    var genreList: [GenreData.Genre] = []
-    var resultList: [MovieData.Results] = [] {
+final class MainViewController: UIViewController {
+    private let trendTableView = UITableView()
+    private var genreList: [GenreData.Genre] = []
+    private var resultList: [MovieData.Results] = [] {
         didSet {
             let idList = resultList.map { $0.id }
             
@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    var castData: [[CreditData.Cast]] = [] {
+    private var castData: [[CreditData.Cast]] = [] {
         didSet {
             let allCastFetched = resultList.count == castData.count
             if allCastFetched {
@@ -47,7 +47,7 @@ class MainViewController: UIViewController {
         getMovieData()
     }
     
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         
         trendTableView.delegate = self
@@ -61,7 +61,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    func configureNavigation() {
+    private func configureNavigation() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationController?.navigationBar.topItem?.title = .none
         navigationController?.navigationBar.barTintColor = .white
@@ -75,7 +75,7 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor.black
     }
     
-    func getGenreData() {
+    private func getGenreData() {
         APICall.shared.callRequest(api: .genre, model: GenreData.self) { genreData in
             guard let genreData = genreData else {
                 print("CallgenreData Error", #function)
@@ -86,7 +86,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    func getMovieData() {
+    private func getMovieData() {
         APICall.shared.callRequest(api: .movies, model: MovieData.self) { movieData in
             guard let movieData = movieData else {
                 print("CallMovieData Error", #function)
@@ -97,18 +97,18 @@ class MainViewController: UIViewController {
         }
     }
     
-    func makeGenreText(item: MovieData.Results) -> String {
+    private func makeGenreText(item: MovieData.Results) -> String {
         guard let genreId = item.genreIds.first else { return "# -" }
         guard let genre = genreList.filter({ $0.id == genreId }).first else { return "# -" }
         return "#\(genre.name)"
     }
     
-    func makeScoreText(item: MovieData.Results) -> String {
+    private func makeScoreText(item: MovieData.Results) -> String {
         let grade = item.voteAverage
         return String(format: "%.1f", grade)
     }
     
-    func makeCastText(cast: [CreditData.Cast]) -> String {
+    private func makeCastText(cast: [CreditData.Cast]) -> String {
         let casts = cast[0...3]
             .map{ $0.name }
             .joined(separator: ", ")

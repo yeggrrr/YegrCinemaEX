@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-class RecommendTableViewCell: UITableViewCell {
-    let titleLabel = UILabel()
-    let recommendCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+final class RecommendTableViewCell: UITableViewCell {
+    private let titleLabel = UILabel()
+    private let recommendCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
-    var recommendResults: [ContentsImageData.ContentsResults] = []
+    private var recommendResults: [ContentsImageData.ContentsResults] = []
     
-    var cellType: CellType = .none
+    private var cellType: CellType = .none
     
     enum CellType {
         case exist
@@ -43,7 +43,7 @@ class RecommendTableViewCell: UITableViewCell {
         recommendCollectionView.reloadData()
     }
     
-    func configureUI() {
+    private func configureUI() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(recommendCollectionView)
         
@@ -65,13 +65,13 @@ class RecommendTableViewCell: UITableViewCell {
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
     }
     
-    func configureCollectionView() {
+    private func configureCollectionView() {
         recommendCollectionView.dataSource = self
         recommendCollectionView.delegate = self
         recommendCollectionView.register(RecommendCollectionViewCell.self, forCellWithReuseIdentifier: RecommendCollectionViewCell.id)
     }
     
-    static func collectionViewLayout() -> UICollectionViewLayout {
+    private static func collectionViewLayout() -> UICollectionViewLayout {
         let layout  = UICollectionViewFlowLayout()
         let sectionSpacing: CGFloat = 5
         let cellSpacing: CGFloat = 5

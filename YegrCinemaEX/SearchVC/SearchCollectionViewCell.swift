@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class SearchCollectionViewCell: UICollectionViewCell {
-    let posterStackView = UIStackView()
-    let posterImageView = UIImageView()
-    let titleLabel = UILabel()
+final class SearchCollectionViewCell: UICollectionViewCell {
+    private let posterStackView = UIStackView()
+    private let posterImageView = UIImageView()
+    private let titleLabel = UILabel()
     var index: Int?
     
     override init(frame: CGRect) {
@@ -25,7 +25,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    func configureUI() {
+    private func configureUI() {
         backgroundColor = .systemGray6
         
         contentView.addSubview(posterStackView)

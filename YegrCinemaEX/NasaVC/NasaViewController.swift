@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class NasaViewController: UIViewController {
+final class NasaViewController: UIViewController {
     enum Nasa: String, CaseIterable {
         static let baseURL = "https://apod.nasa.gov/apod/image/"
         
@@ -27,13 +27,13 @@ class NasaViewController: UIViewController {
         }
     }
     
-    let nasaImageView = UIImageView()
-    let progressLabel = UILabel()
-    let requestButton = UIButton()
+    private let nasaImageView = UIImageView()
+    private let progressLabel = UILabel()
+    private let requestButton = UIButton()
     
-    var session: URLSession?
-    var total: Double = 0
-    var buffer: Data? {
+    private var session: URLSession?
+    private var total: Double = 0
+    private var buffer: Data? {
         didSet {
             guard let buffer = buffer else { return }
             let result = Double(buffer.count) / total
@@ -52,13 +52,13 @@ class NasaViewController: UIViewController {
         configureUI()
     }
     
-    func configureHierarchy() {
+    private func configureHierarchy() {
         view.addSubview(nasaImageView)
         view.addSubview(progressLabel)
         view.addSubview(requestButton)
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         let safeArea = view.safeAreaLayoutGuide
         requestButton.snp.makeConstraints {
             $0.top.horizontalEdges.equalTo(safeArea).inset(20)
@@ -77,7 +77,7 @@ class NasaViewController: UIViewController {
         }
     }
     
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         title = "NASA"
         
@@ -92,7 +92,7 @@ class NasaViewController: UIViewController {
         nasaImageView.backgroundColor = .systemGray6
     }
     
-    func callRequest() {
+    private func callRequest() {
         let request = URLRequest(url: Nasa.photo)
         session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
         session?.dataTask(with: request).resume()

@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-class SimilarTableViewCell: UITableViewCell {
-    let titleLabel = UILabel()
-    let similarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+final class SimilarTableViewCell: UITableViewCell {
+    private let titleLabel = UILabel()
+    private let similarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
-    var similarResults: [ContentsImageData.ContentsResults] = []
+    private var similarResults: [ContentsImageData.ContentsResults] = []
     
-    var cellType: CellType = .none
+    private var cellType: CellType = .none
     
     enum CellType {
         case exist
@@ -43,7 +43,7 @@ class SimilarTableViewCell: UITableViewCell {
         similarCollectionView.reloadData()
     }
     
-    func configureUI() {
+    private func configureUI() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(similarCollectionView)
         
@@ -67,13 +67,13 @@ class SimilarTableViewCell: UITableViewCell {
         similarCollectionView.backgroundColor = .white
     }
     
-    func configureCollectionView() {
+    private func configureCollectionView() {
         similarCollectionView.dataSource = self
         similarCollectionView.delegate = self
         similarCollectionView.register(SimilarCollectionViewCell.self, forCellWithReuseIdentifier: SimilarCollectionViewCell.id)
     }
     
-    static func collectionViewLayout() -> UICollectionViewLayout {
+    private static func collectionViewLayout() -> UICollectionViewLayout {
         let layout  = UICollectionViewFlowLayout()
         let sectionSpacing: CGFloat = 5
         let cellSpacing: CGFloat = 5

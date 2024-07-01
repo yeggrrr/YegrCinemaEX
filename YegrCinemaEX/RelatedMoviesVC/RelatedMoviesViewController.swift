@@ -8,31 +8,31 @@
 import UIKit
 import SnapKit
 
-class RelatedMoviesViewController: UIViewController {
+final class RelatedMoviesViewController: UIViewController {
     enum CellType: Int {
         case similar = 0
         case recommend = 1
         case poster = 2
     }
     
-    let movieTitleLabel = UILabel()
-    let relatedMoviesTableView = UITableView()
-    let cellTypeList: [CellType] = [.similar, .recommend, .poster]
+    private let movieTitleLabel = UILabel()
+    private let relatedMoviesTableView = UITableView()
+    private let cellTypeList: [CellType] = [.similar, .recommend, .poster]
     
-    var movieTitle: String?
-    var id: Int?
+    private var movieTitle: String?
+    private var id: Int?
     
-    var similarDataList: [ContentsImageData.ContentsResults] = [] {
+    private var similarDataList: [ContentsImageData.ContentsResults] = [] {
         didSet {
             relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.similar.rawValue, section: 0)], with: .automatic)
         }
     }
-    var recommendDataList: [ContentsImageData.ContentsResults] = [] {
+    private var recommendDataList: [ContentsImageData.ContentsResults] = [] {
         didSet {
             relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.recommend.rawValue, section: 0)], with: .automatic)
         }
     }
-    var posterDataList: [MoviePosterData.Backdrops] = [] {
+    private var posterDataList: [MoviePosterData.Backdrops] = [] {
         didSet {
             relatedMoviesTableView.reloadRows(at: [IndexPath(row: CellType.poster.rawValue, section: 0)], with: .automatic)
         }
@@ -50,7 +50,7 @@ class RelatedMoviesViewController: UIViewController {
         }
     }
     
-    func getData(id: Int) {
+    private func getData(id: Int) {
         APICall.shared.getSimilar(api: .similar(id: id)) { similarData in
             self.similarDataList = similarData
         } errorHandler: { error in
@@ -73,13 +73,13 @@ class RelatedMoviesViewController: UIViewController {
         }
     }
     
-    func configureNavigation() {
+    private func configureNavigation() {
         let right = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(moreInfoButtonClicked))
         navigationItem.rightBarButtonItem = right
         navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         
         view.addSubview(movieTitleLabel)
@@ -109,7 +109,7 @@ class RelatedMoviesViewController: UIViewController {
         movieTitleLabel.font = .systemFont(ofSize: 25, weight: .bold)
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         relatedMoviesTableView.delegate = self
         relatedMoviesTableView.dataSource = self
         

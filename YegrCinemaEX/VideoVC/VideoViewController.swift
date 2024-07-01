@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class VideoViewController: UIViewController {
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    var seriesList: [PopularSeriesList.Results] = [] {
+final class VideoViewController: UIViewController {
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    private var seriesList: [PopularSeriesList.Results] = [] {
         didSet {
             let idList = seriesList.map { $0.id }
             
@@ -30,7 +30,7 @@ class VideoViewController: UIViewController {
         }
     }
     
-    var keyList: [String?] = []
+    private var keyList: [String?] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class VideoViewController: UIViewController {
         callRequest()
     }
     
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .lightGray
         
         title = "비디오"
@@ -58,7 +58,7 @@ class VideoViewController: UIViewController {
         collectionView.layer.cornerRadius = 20
     }
     
-    func callRequest() {
+    private func callRequest() {
         APICall.shared.callRequest(api: .popularSeries, model: PopularSeriesList.self) { seriesData in
             guard let seriesData = seriesData else { return }
             self.seriesList.append(contentsOf: seriesData.results)
@@ -67,7 +67,7 @@ class VideoViewController: UIViewController {
         }
     }
     
-    static func collectionViewLayout() -> UICollectionViewLayout {
+    private static func collectionViewLayout() -> UICollectionViewLayout {
         let layout  = UICollectionViewFlowLayout()
         let sectionSpacing: CGFloat = 5
         let cellSpacing: CGFloat = 5

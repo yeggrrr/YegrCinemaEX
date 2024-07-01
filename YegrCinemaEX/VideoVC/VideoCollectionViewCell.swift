@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-class VideoCollectionViewCell: UICollectionViewCell {
-    let titleLabel = UILabel()
-    let posterImageView = UIImageView()
-    let overviewScrollView = UIScrollView()
-    let overviewBackgroundView = UIView()
-    let overviewLabel = UILabel()
+final class VideoCollectionViewCell: UICollectionViewCell {
+    private let titleLabel = UILabel()
+    private let posterImageView = UIImageView()
+    private let overviewScrollView = UIScrollView()
+    private let overviewBackgroundView = UIView()
+    private let overviewLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +27,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
      
-    func configureHierarchy() {
+    private func configureHierarchy() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(posterImageView)
         contentView.addSubview(overviewScrollView)
@@ -35,7 +35,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         overviewBackgroundView.addSubview(overviewLabel)
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         let safeArea = contentView.safeAreaLayoutGuide
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeArea).offset(30)
@@ -68,7 +68,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureUI() {
+    private func configureUI() {
         titleLabel.videoUI(txtColor: .label, txtAlignment: .center, fontStyle: .systemFont(ofSize: 22, weight: .bold), titleNumberOfLines: 0)
         overviewLabel.videoUI(txtColor: .white, txtAlignment: .left, fontStyle: .systemFont(ofSize: 17, weight: .regular), titleNumberOfLines: 0)
         overviewBackgroundView.backgroundColor = .lightGray

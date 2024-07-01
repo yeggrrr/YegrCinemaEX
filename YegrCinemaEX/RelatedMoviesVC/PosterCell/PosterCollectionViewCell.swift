@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class PosterCollectionViewCell: UICollectionViewCell {
+final class PosterCollectionViewCell: UICollectionViewCell {
     let posterImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -23,7 +23,7 @@ class PosterCollectionViewCell: UICollectionViewCell {
         configureUI()
     }
     
-    func configureUI() {
+    private func configureUI() {
         contentView.addSubview(posterImageView)
         posterImageView.snp.makeConstraints {
             $0.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)

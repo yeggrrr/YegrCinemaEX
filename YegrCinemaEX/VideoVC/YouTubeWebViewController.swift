@@ -8,8 +8,8 @@
 import UIKit
 import WebKit
 
-class YouTubeWebViewController: UIViewController {
-    let webView = WKWebView()
+final class YouTubeWebViewController: UIViewController {
+    private let webView = WKWebView()
     var key: String?
     var series: PopularSeriesList.Results?
     
@@ -20,14 +20,14 @@ class YouTubeWebViewController: UIViewController {
         configureWebView()
     }
     
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         
         guard let seriesName = series?.name else { return }
         title = seriesName
     }
     
-    func configureWebView() {
+    private func configureWebView() {
         view.addSubview(webView)
         
         webView.snp.makeConstraints {

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class SearchDetailViewController: UIViewController {
+final class SearchDetailViewController: UIViewController {
     let searchDetailView = SearchDetailView()
     var searchList: SearchMovie.Results?
     

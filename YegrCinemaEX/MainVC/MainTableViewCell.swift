@@ -8,23 +8,23 @@
 import UIKit
 import SnapKit
 
-class MainTableViewCell: UITableViewCell {
-    let dateGenreStackView = UIStackView()
+final class MainTableViewCell: UITableViewCell {
+    private let dateGenreStackView = UIStackView()
     let dateLabel = UILabel()
     let genreLabel = UILabel()
     
-    let mainView = UIView()
+    private let mainView = UIView()
     let posterImageView = UIImageView()
     let clipButton = UIButton(type: .system)
-    let gradeStackeVeiw = UIStackView()
-    let ScoreLabel = UILabel()
+    private let gradeStackeVeiw = UIStackView()
+    private let ScoreLabel = UILabel()
     let ScoreNumLabel = UILabel()
     
-    let mainTitleView = UIView()
+    private let mainTitleView = UIView()
     let titleLabel = UILabel()
     let charactersLabel = UILabel()
-    let dividerView = UIView()
-    let learnMoreButton = UIButton()
+    private let dividerView = UIView()
+    private let learnMoreButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,7 +38,7 @@ class MainTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configurHierarchy() {
+    private func configurHierarchy() {
         contentView.addSubview(dateGenreStackView)
         dateGenreStackView.addArrangedSubview(dateLabel)
         dateGenreStackView.addArrangedSubview(genreLabel)
@@ -59,7 +59,7 @@ class MainTableViewCell: UITableViewCell {
         mainTitleView.addSubview(learnMoreButton)
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         let safeArea = contentView.safeAreaLayoutGuide
         dateGenreStackView.snp.makeConstraints {
             $0.top.equalTo(safeArea).offset(10)
@@ -145,7 +145,7 @@ class MainTableViewCell: UITableViewCell {
 
     }
     
-    func configureUI()  {
+    private func configureUI()  {
         dateGenreStackView.axis = .vertical
         dateLabel.setUI(aligment: .left, lbTextColor: .darkGray, fontStyle: .systemFont(ofSize: 14))
         genreLabel.setUI(aligment: .left, lbTextColor: .label, fontStyle: .boldSystemFont(ofSize: 20))

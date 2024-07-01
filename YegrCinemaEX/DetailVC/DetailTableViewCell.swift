@@ -8,10 +8,10 @@
 import UIKit
 import SnapKit
 
-class DetailOverViewTableViewCell: UITableViewCell {
-    let overViewLabel = UILabel()
-    let dropDownButton = UIButton()
-    var buttonState = false
+final class DetailOverViewTableViewCell: UITableViewCell {
+    private let overViewLabel = UILabel()
+    private let dropDownButton = UIButton()
+    private var buttonState = false
     var tableVew: UITableView?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -24,7 +24,7 @@ class DetailOverViewTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    private func configureUI() {
         backgroundColor = .white
         
         contentView.addSubview(overViewLabel)

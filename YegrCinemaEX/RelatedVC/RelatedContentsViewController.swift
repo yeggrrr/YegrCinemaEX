@@ -15,17 +15,17 @@ enum CellType: String {
     case poster = "포스터"
 }
 
-class RelatedContentsViewController: UIViewController {
-    let movieTitleLabel = UILabel()
-    let relatedcontentsTableView = UITableView()
+final class RelatedContentsViewController: UIViewController {
+    private let movieTitleLabel = UILabel()
+    private let relatedcontentsTableView = UITableView()
     
     var movieTitle: String?
     var id: Int?
     
-    var contentsImageList: [[ContentsImageData.ContentsResults]] = []
-    var posterImageList: [MoviePosterData.Backdrops] = []
+    private var contentsImageList: [[ContentsImageData.ContentsResults]] = []
+    private var posterImageList: [MoviePosterData.Backdrops] = []
     
-    let cellTypeList: [CellType] = [.similar, .recommend, .poster]
+    private let cellTypeList: [CellType] = [.similar, .recommend, .poster]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,19 +39,19 @@ class RelatedContentsViewController: UIViewController {
         }
     }
     
-    func configureNavigation() {
+    private func configureNavigation() {
         let right = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(moreInfoButtonClicked))
         navigationItem.rightBarButtonItem = right
         navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         relatedcontentsTableView.delegate = self
         relatedcontentsTableView.dataSource = self
         relatedcontentsTableView.register(RelatedContentsTableViewCell.self, forCellReuseIdentifier: RelatedContentsTableViewCell.id)
     }
     
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         
         view.addSubview(movieTitleLabel)
@@ -83,7 +83,7 @@ class RelatedContentsViewController: UIViewController {
         relatedcontentsTableView.backgroundColor = .lightGray
     }
     
-    func getData(id: Int) {
+    private func getData(id: Int) {
         let group = DispatchGroup()
         
         group.enter()

@@ -10,14 +10,14 @@ import SnapKit
 import Alamofire
 import Kingfisher
 
-class SearchCollectionViewController: UIViewController {
-    let searchBar = UISearchBar()
-    let searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    let noticeLabel = UILabel()
-    var page = 1
-    var lastPage: Int?
+final class SearchCollectionViewController: UIViewController {
+    private let searchBar = UISearchBar()
+    private let searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    private let noticeLabel = UILabel()
+    private var page = 1
+    private var lastPage: Int?
     
-    var movieList: [SearchMovie.Results] = [] {
+    private var movieList: [SearchMovie.Results] = [] {
         didSet {
             searchCollectionView.reloadData()
         }
@@ -30,7 +30,7 @@ class SearchCollectionViewController: UIViewController {
         configureUI()
     }
     
-    func configureUI() {
+    private func configureUI() {
         navigationItem.title = "영화 검색"
         view.backgroundColor = .white
         
@@ -48,7 +48,7 @@ class SearchCollectionViewController: UIViewController {
         noticeLabel.isHidden = true
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         view.addSubview(searchBar)
         view.addSubview(searchCollectionView)
         view.addSubview(noticeLabel)
@@ -71,11 +71,11 @@ class SearchCollectionViewController: UIViewController {
         }
     }
     
-    func dismissKeyboard() {
+    private func dismissKeyboard() {
         searchBar.resignFirstResponder()
     }
     
-    static func collectionViewLayout() -> UICollectionViewLayout {
+    private static func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width - 20
         layout.itemSize = CGSize(width:  width / 3, height: width / 3)

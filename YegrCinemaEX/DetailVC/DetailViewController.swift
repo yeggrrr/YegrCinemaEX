@@ -10,11 +10,11 @@ import SnapKit
 import Alamofire
 import Kingfisher
 
-class DetailViewController: UIViewController {
-    let posterImageView = UIImageView()
-    let titleLabel = UILabel()
-    let subposterImageView = UIImageView()
-    let detailTableView = UITableView()
+final class DetailViewController: UIViewController {
+    private let posterImageView = UIImageView()
+    private let titleLabel = UILabel()
+    private let subposterImageView = UIImageView()
+    private let detailTableView = UITableView()
     
     var selectedMovie: MovieData.Results?
     var castData: [CreditData.Cast] = []
@@ -28,19 +28,19 @@ class DetailViewController: UIViewController {
         configureTableView()
     }
     
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .white
         navigationItem.title = "출연/제작"
     }
     
-    func configureTableView() {
+    private func configureTableView() {
         detailTableView.delegate = self
         detailTableView.dataSource = self
         detailTableView.register(DetailOverViewTableViewCell.self, forCellReuseIdentifier: DetailOverViewTableViewCell.id)
         detailTableView.register(DetailCastTableViewCell.self, forCellReuseIdentifier: DetailCastTableViewCell.id)
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         // configureHierarchy
         view.addSubview(posterImageView)
         view.addSubview(detailTableView)
@@ -82,7 +82,7 @@ class DetailViewController: UIViewController {
         titleLabel.numberOfLines = 0
     }
     
-    func setViewData() {
+    private func setViewData() {
         guard let selectedMovie = selectedMovie else { return }
         let backImage = selectedMovie.backdropPath
         let posterImage = selectedMovie.posterPath

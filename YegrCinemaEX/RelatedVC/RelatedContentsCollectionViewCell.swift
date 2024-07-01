@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RelatedContentsCollectionViewCell: UICollectionViewCell {
+final class RelatedContentsCollectionViewCell: UICollectionViewCell {
     let posterImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -21,7 +21,7 @@ class RelatedContentsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureView() {
+    private func configureView() {
         contentView.addSubview(posterImageView)
         posterImageView.snp.makeConstraints {
             $0.edges.equalTo(contentView.safeAreaLayoutGuide)

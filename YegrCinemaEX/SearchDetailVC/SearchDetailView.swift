@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchDetailView: UIView {
+final class SearchDetailView: UIView {
     let titleLabel = UILabel()
     let posterImageView = UIImageView()
     let overviewScrollView = UIScrollView()
